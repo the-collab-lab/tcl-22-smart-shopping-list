@@ -8,4 +8,5 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Mentors
 - [Lauren Beatty](https://github.com/laurenmbeatty) 👩‍🎤
+- [Jonathan Yeong](https://github.com/jonathanyeong) 🧗‍♂️
 ## Code of Conduct Contacts
