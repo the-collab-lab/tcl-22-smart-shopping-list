@@ -7,6 +7,9 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Cohort Participants
 
 ## Mentors
+
 - [Lauren Beatty](https://github.com/laurenmbeatty) 👩‍🎤
 - [Jonathan Yeong](https://github.com/jonathanyeong) 🧗‍♂️
+- [Luis Augusto](https://github.com/luisaugusto) 🏞
+
 ## Code of Conduct Contacts
