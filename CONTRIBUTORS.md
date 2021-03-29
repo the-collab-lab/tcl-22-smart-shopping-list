@@ -6,6 +6,8 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Cohort Participants
 
+- [Caitlin Floyd](https://github.com/cafloyd) 🌸
+
 ## Mentors
 
 - [Lauren Beatty](https://github.com/laurenmbeatty) 👩‍🎤
