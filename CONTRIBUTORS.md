@@ -7,6 +7,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 ## Cohort Participants
 
 - [Caitlin Floyd](https://github.com/cafloyd) 🌸
+- [Daria Tsvetkova](https://github.com/dariatsvetkova) :smirk_cat:
 
 ## Mentors
 
