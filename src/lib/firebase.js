@@ -6,14 +6,16 @@ import 'firebase/firestore';
 // Initalize Firebase.
 // These details will need to be replaced with the project specific env vars at the start of each new cohort.
 var firebaseConfig = {
-    apiKey: "AIzaSyA0UVyQeViBUArtY0kfWxkD3TzhoSnVfcw",
-    authDomain: "tcl-22-shopping-list.firebaseapp.com",
-    projectId: "tcl-22-shopping-list",
-    storageBucket: "tcl-22-shopping-list.appspot.com",
-    messagingSenderId: "908757844017",
-    appId: "1:908757844017:web:27af0d8875560207361510"
+  apiKey: 'AIzaSyA0UVyQeViBUArtY0kfWxkD3TzhoSnVfcw',
+  authDomain: 'tcl-22-shopping-list.firebaseapp.com',
+  projectId: 'tcl-22-shopping-list',
+  storageBucket: 'tcl-22-shopping-list.appspot.com',
+  messagingSenderId: '908757844017',
+  appId: '1:908757844017:web:27af0d8875560207361510',
 };
 
 let fb = firebase.initializeApp(firebaseConfig);
 
-export { fb };
+var db = firebase.firestore();
+
+export { fb, db };
