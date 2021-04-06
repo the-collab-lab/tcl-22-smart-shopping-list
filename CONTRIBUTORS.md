@@ -9,7 +9,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 - [Caitlin Floyd](https://github.com/cafloyd) 🌸
 - [Daria Tsvetkova](https://github.com/dariatsvetkova) :smirk_cat:
 - [Karan Katoch](https://github.com/kkatoch89) 🦊
-- [Abby Benjamin](https://github.com/ablizben) :ghost:
+- [Abby Benjamin](https://github.com/ablizben) 👻
 
 ## Mentors
 
