@@ -1,29 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { db } from './lib/firebase';
 
 function AddGroceries(props) {
+  const [groceryItem, setGroceryItem] = useState('');
+  const updateGroceryItem = (event) => {
+    setGroceryItem(event.target.value);
+  };
+  const submitGroceryItem = (event) => {
+    event.preventDefault();
+    db.collection('items').add({
+      input: { groceryItem },
+    });
+  };
+
   return (
     <div>
-      {/* <form id="test-form" onSubmit={submitItem}> */}
-      <form id="test-form">
-        {/* <input type="text" value={groceryItem} /> */}
-        <input type="text" />
+      <form id="test-form" onSubmit={submitGroceryItem}>
+        <input type="text" value={groceryItem} onChange={updateGroceryItem} />
         <input type="submit" />
       </form>
     </div>
   );
 }
-
-// function submitItem() {
-//     db.collection("items").add({
-//         input: groceryItem
-//     })
-//     .then((docRef => {
-//     console.log("Document written with ID: ", docRef.id);
-//     })
-//     .catch((error) => {
-//     console.error("Error adding document: ", error);
-// })
-// }
 
 export default AddGroceries;
