@@ -15,27 +15,30 @@ function App() {
       <div className="App">
         <h1>Shopping app</h1>
         <Switch>
-          <Route path="/grocerylist">
+          <Route path="/list">
             <GroceryList />
           </Route>
-          <Route path="/addgroceries">
+          <Route path="/additems">
             <AddGroceries />
           </Route>
         </Switch>
-        <nav style={{ 
-          position: 'absolute',
-          bottom: '0',
-          width: '100%'
-          }}>
-          <ul style={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            paddingLeft: '0'
+        <nav
+          style={{
+            position: 'absolute',
+            bottom: '0',
+            width: '100%',
+          }}
+        >
+          <ul
+            style={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              paddingLeft: '0',
             }}
           >
             <li>
               <NavLink
-                to="/grocerylist"
+                to="/list"
                 activeStyle={{
                   fontWeight: 'bold',
                 }}
@@ -45,7 +48,7 @@ function App() {
             </li>
             <li>
               <NavLink
-                to="/addgroceries"
+                to="/additems"
                 activeStyle={{
                   fontWeight: 'bold',
                 }}
