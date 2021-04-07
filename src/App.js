@@ -6,52 +6,51 @@ import {
   Route,
   NavLink,
 } from 'react-router-dom';
-import AddItem from './components/AddItem';
-import List from './components/List';
+import AddGroceries from './AddGroceries';
+import GroceryList from './GroceryList';
 
 function App() {
   return (
     <Router>
-      <div
-        className="App"
-        style={{
-          display: 'flex',
-          flexFlow: 'column nowrap',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          minHeight: '100vh',
-          position: 'relative',
-        }}
-      >
+      <div className="App">
         <h1>Shopping app</h1>
         <Switch>
-          <Route path="/list">
-            <List />
+          <Route path="/grocerylist">
+            <GroceryList />
           </Route>
-          <Route path="/additem">
-            <AddItem />
+          <Route path="/addgroceries">
+            <AddGroceries />
           </Route>
         </Switch>
-        <nav style={{ position: 'absolute', bottom: '0' }}>
-          <ul>
+        <nav style={{ 
+          position: 'absolute',
+          bottom: '0',
+          width: '100%'
+          }}>
+          <ul style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingLeft: '0'
+            }}
+          >
             <li>
               <NavLink
-                to="/list"
+                to="/grocerylist"
                 activeStyle={{
                   fontWeight: 'bold',
                 }}
               >
-                List
+                Grocery List
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/additem"
+                to="/addgroceries"
                 activeStyle={{
                   fontWeight: 'bold',
                 }}
               >
-                Add Item
+                Add Groceries
               </NavLink>
             </li>
           </ul>
