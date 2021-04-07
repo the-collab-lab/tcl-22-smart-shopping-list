@@ -29,7 +29,7 @@ function App() {
           }}>
           <ul style={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             paddingLeft: '0'
             }}
           >
