@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { db } from './lib/firebase';
 
-function AddGroceries(props) {
+function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
   const updateGroceryItem = (event) => {
     setGroceryItem(event.target.value);
@@ -35,4 +35,4 @@ function AddGroceries(props) {
   );
 }
 
-export default AddGroceries;
+export default AddItems;

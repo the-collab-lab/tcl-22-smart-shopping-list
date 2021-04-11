@@ -6,8 +6,8 @@ import {
   Route,
   NavLink,
 } from 'react-router-dom';
-import AddGroceries from './AddGroceries';
-import GroceryList from './GroceryList';
+import AddItems from './AddItems';
+import ItemList from './ItemList';
 
 function App() {
   return (
@@ -16,10 +16,10 @@ function App() {
         <h1>Shopping app</h1>
         <Switch>
           <Route path="/list">
-            <GroceryList />
+            <ItemList />
           </Route>
           <Route path="/additems">
-            <AddGroceries />
+            <AddItems />
           </Route>
         </Switch>
         <nav

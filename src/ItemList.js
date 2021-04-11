@@ -2,7 +2,7 @@ import React from 'react';
 import { db } from './lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
-function GroceryList() {
+function ItemList() {
   const [value, loading, error] = useCollection(db.collection('items'), {
     snapshotListenOptions: { includeMetadataChanges: true },
   });
@@ -25,4 +25,4 @@ function GroceryList() {
     </div>
   );
 }
-export default GroceryList;
+export default ItemList;
