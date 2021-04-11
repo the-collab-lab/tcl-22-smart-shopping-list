@@ -16,8 +16,20 @@ function AddGroceries(props) {
   return (
     <div>
       <form id="test-form" onSubmit={submitGroceryItem}>
-        <input type="text" value={groceryItem} onChange={updateGroceryItem} />
-        <input type="submit" />
+        <label htmlFor="item">Item name:</label>
+        <input
+          type="text"
+          id="item"
+          value={groceryItem}
+          onChange={updateGroceryItem}
+        />
+        <input type="radio" id="soon" value={7} name="frequency" />
+        <label htmlFor="soon">Soon (in the next 7 days)</label>
+        <input type="radio" id="kindOfSoon" value={14} name="frequency" />
+        <label htmlFor="kindOfSoon">Kind of soon (in the next 14 days)</label>
+        <input type="radio" id="notSoon" value={30} name="frequency" />
+        <label htmlFor="notSoon">Not soon (in the next 30 days)</label>
+        <input type="submit" value="Add item" />
       </form>
     </div>
   );
