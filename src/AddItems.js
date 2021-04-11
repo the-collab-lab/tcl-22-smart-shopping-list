@@ -3,14 +3,19 @@ import { db } from './lib/firebase';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
+  const [userToken, setUserToken] = useState('randomTokenOne');
   const updateGroceryItem = (event) => {
     setGroceryItem(event.target.value);
   };
   const submitGroceryItem = (event) => {
     event.preventDefault();
-    db.collection('items').add({
-      input: { groceryItem },
-    });
+    const formData = {
+      itemName: groceryItem,
+      frequency: document.querySelectorAll('input[name=frequency]:checked')[0]
+        .value,
+      lastPurchaseDate: null,
+    };
+    db.collection(userToken).add({ formData });
   };
 
   return (

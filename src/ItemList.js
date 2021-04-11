@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { db } from './lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
 function ItemList() {
-  const [value, loading, error] = useCollection(db.collection('items'), {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  const [value, loading, error] = useCollection(
+    db.collection('randomTokenOne'),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    },
+  );
+
   return (
     <div>
       <p>
@@ -16,7 +20,7 @@ function ItemList() {
             Collection:{' '}
             {value.docs.map((doc) => (
               <React.Fragment key={doc.id}>
-                {JSON.stringify(doc.data())},{' '}
+                {JSON.stringify(doc.data()['formData']['itemName'])},{' '}
               </React.Fragment>
             ))}
           </span>
