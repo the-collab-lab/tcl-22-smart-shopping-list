@@ -5,11 +5,20 @@ import {
   Switch,
   Route,
   NavLink,
+  Redirect,
 } from 'react-router-dom';
 import AddGroceries from './AddGroceries';
 import GroceryList from './GroceryList';
+import Welcome from './Welcome';
+import getToken from './lib/tokens';
 
 function App() {
+  const hasToken = localStorage.getItem('userToken');
+  const storeToken = () => {
+    const token = getToken();
+    localStorage.setItem('userToken', token);
+    window.location.replace('/list');
+  };
   return (
     <Router>
       <div className="App">
@@ -20,6 +29,13 @@ function App() {
           </Route>
           <Route path="/additems">
             <AddGroceries />
+          </Route>
+          <Route exact path="/">
+            {hasToken ? (
+              <Redirect to="/list" />
+            ) : (
+              <Welcome storeToken={storeToken} />
+            )}
           </Route>
         </Switch>
         <nav
