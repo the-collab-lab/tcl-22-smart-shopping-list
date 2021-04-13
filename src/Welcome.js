@@ -1,15 +1,18 @@
 import React from 'react';
 import getToken from './lib/tokens';
+import { useHistory } from 'react-router-dom';
 
 const Welcome = () => {
+  let history = useHistory();
+
   const storeToken = () => {
     const token = getToken();
     localStorage.setItem('userToken', token);
-    window.location.replace('/list');
+    history.push('/list');
   };
   return (
     <div>
-      <h1>Welcome to your Smart Shopping List!</h1>
+      <h2>Welcome to your Smart Shopping List!</h2>
       <button onClick={() => storeToken()}>Create a new list</button>
     </div>
   );
