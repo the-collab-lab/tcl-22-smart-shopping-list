@@ -5,11 +5,14 @@ import {
   Switch,
   Route,
   NavLink,
+  Redirect,
 } from 'react-router-dom';
 import AddGroceries from './AddGroceries';
 import GroceryList from './GroceryList';
+import Welcome from './Welcome';
 
 function App() {
+  const hasToken = localStorage.getItem('userToken');
   return (
     <Router>
       <div className="App">
@@ -20,6 +23,9 @@ function App() {
           </Route>
           <Route path="/additems">
             <AddGroceries />
+          </Route>
+          <Route exact path="/">
+            {hasToken ? <Redirect to="/list" /> : <Welcome />}
           </Route>
         </Switch>
         <nav
