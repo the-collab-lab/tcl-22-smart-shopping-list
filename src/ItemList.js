@@ -12,20 +12,23 @@ function ItemList() {
 
   return (
     <div>
-      <p>
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
-        {loading && <span>Collection: Loading...</span>}
-        {value && (
-          <span>
-            Collection:{' '}
+      {error && <strong>Error: {JSON.stringify(error)}</strong>}
+      {loading && <span>Collection: Loading...</span>}
+      {value && (
+        <>
+          <h2>Shopping List:</h2>
+          <ul>
             {value.docs.map((doc) => (
-              <React.Fragment key={doc.id}>
-                {JSON.stringify(doc.data()['formData']['itemName'])},{' '}
-              </React.Fragment>
+              <li key={doc.id}>
+                {JSON.stringify(doc.data()['formData']['itemName']).replace(
+                  /['"]+/g,
+                  '',
+                )}
+              </li>
             ))}
-          </span>
-        )}
-      </p>
+          </ul>
+        </>
+      )}
     </div>
   );
 }
