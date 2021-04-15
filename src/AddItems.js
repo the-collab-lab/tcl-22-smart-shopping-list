@@ -16,6 +16,7 @@ function AddItems(props) {
       lastPurchaseDate: null,
     };
     db.collection(userToken).add({ formData });
+    setGroceryItem('')
   };
 
   return (
