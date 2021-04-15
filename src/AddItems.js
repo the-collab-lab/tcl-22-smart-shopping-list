@@ -59,7 +59,7 @@ function AddItems(props) {
           name="frequency"
           checked={itemFreq === 14}
           required={formValidationVisual}
-          onChange={radioBtnHandler}
+          onChange={(e) => radioBtnHandler(e)}
         />
         <label htmlFor="kindOfSoon">Kind of soon (in the next 14 days)</label>
         <input
@@ -69,7 +69,7 @@ function AddItems(props) {
           name="frequency"
           checked={itemFreq === 30}
           required={formValidationVisual}
-          onChange={radioBtnHandler}
+          onChange={(e) => radioBtnHandler(e)}
         />
         <label htmlFor="notSoon">Not soon (in the next 30 days)</label>
         <input type="submit" value="Add item" />
