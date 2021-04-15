@@ -3,12 +3,10 @@ import { db } from './lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
 function ItemList() {
-  const [value, loading, error] = useCollection(
-    db.collection('randomTokenOne'),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    },
-  );
+  const userToken = localStorage.getItem('userToken');
+  const [value, loading, error] = useCollection(db.collection(userToken), {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
 
   return (
     <div>
