@@ -5,11 +5,9 @@ function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
   const userToken = localStorage.getItem('userToken');
   const [itemFreq, setItemFreq] = useState(7);
-  const [formValidationVisual, setFormValidationVisual] = useState(false);
 
   const updateGroceryItem = (event) => {
     setGroceryItem(event.target.value);
-    setFormValidationVisual(true);
   };
 
   const submitGroceryItem = (event) => {
@@ -22,12 +20,10 @@ function AddItems(props) {
     db.collection(userToken).add({ formData });
     setGroceryItem('');
     setItemFreq(7);
-    setFormValidationVisual(false);
   };
 
   const radioBtnHandler = (event) => {
     setItemFreq(+event.target.value);
-    setFormValidationVisual(true);
   };
 
   return (
@@ -38,7 +34,7 @@ function AddItems(props) {
           type="text"
           id="item"
           value={groceryItem}
-          required={formValidationVisual}
+          required
           onChange={updateGroceryItem}
         />
         <fieldset>
@@ -48,7 +44,7 @@ function AddItems(props) {
             value={7}
             name="frequency"
             checked={itemFreq === 7}
-            required={formValidationVisual}
+            required
             onChange={(e) => radioBtnHandler(e)}
           />
           <label htmlFor="soon">Soon (in the next 7 days)</label>
@@ -58,7 +54,7 @@ function AddItems(props) {
             value={14}
             name="frequency"
             checked={itemFreq === 14}
-            required={formValidationVisual}
+            required
             onChange={(e) => radioBtnHandler(e)}
           />
           <label htmlFor="kindOfSoon">Kind of soon (in the next 14 days)</label>
@@ -68,7 +64,7 @@ function AddItems(props) {
             value={30}
             name="frequency"
             checked={itemFreq === 30}
-            required={formValidationVisual}
+            required
             onChange={(e) => radioBtnHandler(e)}
           />
           <label htmlFor="notSoon">Not soon (in the next 30 days)</label>
