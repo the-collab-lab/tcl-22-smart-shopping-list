@@ -27,12 +27,19 @@ function AddItems(props) {
           id="item"
           value={groceryItem}
           onChange={updateGroceryItem}
+          required
         />
-        <input type="radio" id="soon" value={7} name="frequency" />
+        <input type="radio" id="soon" value={7} name="frequency" required />
         <label htmlFor="soon">Soon (in the next 7 days)</label>
-        <input type="radio" id="kindOfSoon" value={14} name="frequency" />
+        <input
+          type="radio"
+          id="kindOfSoon"
+          value={14}
+          name="frequency"
+          required
+        />
         <label htmlFor="kindOfSoon">Kind of soon (in the next 14 days)</label>
-        <input type="radio" id="notSoon" value={30} name="frequency" />
+        <input type="radio" id="notSoon" value={30} name="frequency" required />
         <label htmlFor="notSoon">Not soon (in the next 30 days)</label>
         <input type="submit" value="Add item" />
       </form>
