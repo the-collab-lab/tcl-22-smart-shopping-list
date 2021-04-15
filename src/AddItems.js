@@ -3,7 +3,7 @@ import { db } from './lib/firebase';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
-userToken = 'randomTokenOne'
+  const userToken = 'randomTokenOne';
   const [itemFreq, setItemFreq] = useState(7);
   const [formValidationVisual, setFormValidationVisual] = useState(false);
 
