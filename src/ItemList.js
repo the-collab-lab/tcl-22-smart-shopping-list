@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { db } from './lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
