@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { db } from './lib/firebase';
-import { capitalize } from './lib/utility';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
@@ -9,7 +8,7 @@ function AddItems(props) {
   const [formValidationVisual, setFormValidationVisual] = useState(false);
 
   const updateGroceryItem = (event) => {
-    setGroceryItem(capitalize(event.target.value));
+    setGroceryItem(event.target.value);
     setFormValidationVisual(true);
   };
 
