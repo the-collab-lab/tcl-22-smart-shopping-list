@@ -41,36 +41,38 @@ function AddItems(props) {
           required={formValidationVisual}
           onChange={updateGroceryItem}
         />
-        <input
-          type="radio"
-          id="soon"
-          value={7}
-          name="frequency"
-          checked={itemFreq === 7}
-          required={formValidationVisual}
-          onChange={(e) => radioBtnHandler(e)}
-        />
-        <label htmlFor="soon">Soon (in the next 7 days)</label>
-        <input
-          type="radio"
-          id="kindOfSoon"
-          value={14}
-          name="frequency"
-          checked={itemFreq === 14}
-          required={formValidationVisual}
-          onChange={(e) => radioBtnHandler(e)}
-        />
-        <label htmlFor="kindOfSoon">Kind of soon (in the next 14 days)</label>
-        <input
-          type="radio"
-          id="notSoon"
-          value={30}
-          name="frequency"
-          checked={itemFreq === 30}
-          required={formValidationVisual}
-          onChange={(e) => radioBtnHandler(e)}
-        />
-        <label htmlFor="notSoon">Not soon (in the next 30 days)</label>
+        <fieldset>
+          <input
+            type="radio"
+            id="soon"
+            value={7}
+            name="frequency"
+            checked={itemFreq === 7}
+            required={formValidationVisual}
+            onChange={(e) => radioBtnHandler(e)}
+          />
+          <label htmlFor="soon">Soon (in the next 7 days)</label>
+          <input
+            type="radio"
+            id="kindOfSoon"
+            value={14}
+            name="frequency"
+            checked={itemFreq === 14}
+            required={formValidationVisual}
+            onChange={(e) => radioBtnHandler(e)}
+          />
+          <label htmlFor="kindOfSoon">Kind of soon (in the next 14 days)</label>
+          <input
+            type="radio"
+            id="notSoon"
+            value={30}
+            name="frequency"
+            checked={itemFreq === 30}
+            required={formValidationVisual}
+            onChange={(e) => radioBtnHandler(e)}
+          />
+          <label htmlFor="notSoon">Not soon (in the next 30 days)</label>
+        </fieldset>
         <input type="submit" value="Add item" />
       </form>
     </div>
