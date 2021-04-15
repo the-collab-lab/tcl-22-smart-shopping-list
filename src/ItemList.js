@@ -20,10 +20,12 @@ function ItemList() {
           <ul>
             {value.docs.map((doc) => (
               <li key={doc.id}>
-                {JSON.stringify(doc.data()['formData']['itemName']).replace(
-                  /['"]+/g,
-                  '',
-                )}
+                {
+                  JSON.stringify(doc.data()['formData']['itemName']).replace(
+                    /['"]+/g,
+                    '',
+                  ).toca
+                }
               </li>
             ))}
           </ul>
