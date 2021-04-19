@@ -1,6 +1,7 @@
 import React from 'react';
 import getToken from './lib/tokens';
 import { useHistory } from 'react-router-dom';
+import ShareToken from './ShareToken';
 
 const Welcome = () => {
   let history = useHistory();
@@ -14,10 +15,8 @@ const Welcome = () => {
     <div>
       <h2>Welcome to your Smart Shopping List!</h2>
       <button onClick={() => storeToken()}>Create a new list</button>
-      {/* 
-      Create form as option for user to enter a shared token and
-      join the existing list
-      */}
+      <hr />
+      <ShareToken />
     </div>
   );
 };
