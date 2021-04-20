@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import { db } from './lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
+import { SnackbarProvider } from 'notistack';
 
 import AddItems from './AddItems';
 import ItemList from './ItemList';
@@ -31,58 +32,62 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <h1>Shopping app</h1>
-        <Switch>
-          <Route path="/list">
-            {!loading && (
-              <ItemList list={list} loading={loading} error={error} />
-            )}
-          </Route>
-          <Route path="/additems">
-            {value && <AddItems list={list} loading={loading} error={error} />}
-          </Route>
-          <Route exact path="/">
-            {hasToken ? <Redirect to="/list" /> : <Welcome />}
-          </Route>
-        </Switch>
-        <nav
-          style={{
-            position: 'absolute',
-            bottom: '0',
-            width: '100%',
-          }}
-        >
-          <ul
+      <SnackbarProvider maxSnack={3} hideIconVariant>
+        <div className="App">
+          <h1>Shopping app</h1>
+          <Switch>
+            <Route path="/list">
+              {!loading && (
+                <ItemList list={list} loading={loading} error={error} />
+              )}
+            </Route>
+            <Route path="/additems">
+              {value && (
+                <AddItems list={list} loading={loading} error={error} />
+              )}
+            </Route>
+            <Route exact path="/">
+              {hasToken ? <Redirect to="/list" /> : <Welcome />}
+            </Route>
+          </Switch>
+          <nav
             style={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              paddingLeft: '0',
+              position: 'absolute',
+              bottom: '0',
+              width: '100%',
             }}
           >
-            <li>
-              <NavLink
-                to="/list"
-                activeStyle={{
-                  fontWeight: 'bold',
-                }}
-              >
-                Grocery List
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/additems"
-                activeStyle={{
-                  fontWeight: 'bold',
-                }}
-              >
-                Add Groceries
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </div>
+            <ul
+              style={{
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                paddingLeft: '0',
+              }}
+            >
+              <li>
+                <NavLink
+                  to="/list"
+                  activeStyle={{
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Grocery List
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/additems"
+                  activeStyle={{
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Add Groceries
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </SnackbarProvider>
     </Router>
   );
 }

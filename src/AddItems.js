@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { db } from './lib/firebase';
+import { useSnackbar } from 'notistack';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
@@ -7,8 +8,18 @@ function AddItems(props) {
   const [itemFreq, setItemFreq] = useState(7);
   const [error, setError] = useState(false);
 
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const updateGroceryItem = (event) => {
     setGroceryItem(event.target.value);
+  };
+
+  const checkItem = (item) => {
+    const itemLetters = item.toLowerCase().split('');
+    const itemLettersFilt = itemLetters.filter((l) => {
+      return /[a-z|\s]/.test(l);
+    });
+    return itemLettersFilt.join('');
   };
 
   const submitGroceryItem = (event) => {
@@ -19,14 +30,18 @@ function AddItems(props) {
       lastPurchaseDate: null,
     };
 
-    const filtered = props.list.filter((item) => item === groceryItem);
+    const filtered = props.list.filter((item) => {
+      return checkItem(item) === checkItem(groceryItem);
+    });
+
     if (filtered.length > 0) {
       setError(true);
+      enqueueSnackbar('Error! Item exists', { variant: 'error' });
+    } else {
+      db.collection(userToken).add({ formData });
+      setGroceryItem('');
+      setItemFreq(7);
     }
-
-    db.collection(userToken).add({ formData });
-    setGroceryItem('');
-    setItemFreq(7);
   };
 
   const radioBtnHandler = (event) => {
@@ -78,11 +93,6 @@ function AddItems(props) {
         </fieldset>
         <input type="submit" value="Add item" />
       </form>
-      {error && (
-        <div>
-          <p>Item already exists!</p>
-        </div>
-      )}
     </div>
   );
 }
