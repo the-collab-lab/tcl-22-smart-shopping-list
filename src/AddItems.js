@@ -6,9 +6,8 @@ function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
   const userToken = localStorage.getItem('userToken');
   const [itemFreq, setItemFreq] = useState(7);
-  const [error, setError] = useState(false);
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const updateGroceryItem = (event) => {
     setGroceryItem(event.target.value);
@@ -35,7 +34,6 @@ function AddItems(props) {
     });
 
     if (filtered.length > 0) {
-      setError(true);
       enqueueSnackbar('Error! Item exists', { variant: 'error' });
     } else {
       db.collection(userToken).add({ formData });
