@@ -7,24 +7,40 @@ import {
   NavLink,
   Redirect,
 } from 'react-router-dom';
+import { db } from './lib/firebase';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 import AddItems from './AddItems';
 import ItemList from './ItemList';
 import Welcome from './Welcome';
 
-
 function App() {
   const hasToken = localStorage.getItem('userToken');
+  const [value, loading, error] = useCollection(db.collection(hasToken), {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
+
+  const list = value
+    ? value.docs.map((doc) =>
+        JSON.stringify(doc.data()['formData']['itemName']).replace(
+          /['"]+/g,
+          '',
+        ),
+      )
+    : [];
+
   return (
     <Router>
       <div className="App">
         <h1>Shopping app</h1>
         <Switch>
           <Route path="/list">
-            <ItemList />
+            {!loading && (
+              <ItemList list={list} loading={loading} error={error} />
+            )}
           </Route>
           <Route path="/additems">
-            <AddItems />
+            {value && <AddItems list={list} loading={loading} error={error} />}
           </Route>
           <Route exact path="/">
             {hasToken ? <Redirect to="/list" /> : <Welcome />}

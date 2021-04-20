@@ -5,6 +5,7 @@ function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
   const userToken = localStorage.getItem('userToken');
   const [itemFreq, setItemFreq] = useState(7);
+  const [error, setError] = useState(false);
 
   const updateGroceryItem = (event) => {
     setGroceryItem(event.target.value);
@@ -17,6 +18,12 @@ function AddItems(props) {
       frequency: itemFreq,
       lastPurchaseDate: null,
     };
+
+    const filtered = props.list.filter((item) => item === groceryItem);
+    if (filtered.length > 0) {
+      setError(true);
+    }
+
     db.collection(userToken).add({ formData });
     setGroceryItem('');
     setItemFreq(7);
@@ -71,6 +78,11 @@ function AddItems(props) {
         </fieldset>
         <input type="submit" value="Add item" />
       </form>
+      {error && (
+        <div>
+          <p>Item already exists!</p>
+        </div>
+      )}
     </div>
   );
 }
