@@ -2,14 +2,25 @@ import React, { useState } from 'react';
 import firebase from './lib/firebase';
 import { db } from './lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
+import { useHistory } from 'react-router-dom';
 
 const ShareToken = () => {
   const [shareToken, setShareToken] = useState(null);
 
   // 1. Make a on submit function where we pull list of collections
+  let history = useHistory();
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(shareToken);
+    db.collection(shareToken)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.empty) {
+          alert('Incorrect token, please try again');
+        } else {
+          localStorage.setItem('userToken', shareToken);
+          history.push('/list');
+        }
+      });
   };
 
   // 2. Create change function that keeps track of user input
