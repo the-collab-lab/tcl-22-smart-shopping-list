@@ -3,8 +3,9 @@ import firebase from './lib/firebase';
 import { db } from './lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useHistory } from 'react-router-dom';
+import { withSnackbar } from 'notistack';
 
-const ShareToken = () => {
+const ShareToken = (props) => {
   const [shareToken, setShareToken] = useState(null);
 
   // 1. Make a on submit function where we pull list of collections
@@ -15,8 +16,13 @@ const ShareToken = () => {
       .get()
       .then((querySnapshot) => {
         if (querySnapshot.empty) {
-          alert('Incorrect token, please try again');
+          props.enqueueSnackbar('Incorrect token, please try again', {
+            variant: 'error',
+          });
         } else {
+          props.enqueueSnackbar('Success', {
+            variant: 'success',
+          });
           localStorage.setItem('userToken', shareToken);
           history.push('/list');
         }
@@ -44,4 +50,4 @@ const ShareToken = () => {
   );
 };
 
-export default ShareToken;
+export default withSnackbar(ShareToken);
