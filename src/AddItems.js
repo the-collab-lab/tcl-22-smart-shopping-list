@@ -29,12 +29,14 @@ function AddItems(props) {
       lastPurchaseDate: null,
     };
 
-    const filtered = props.list.filter((item) => {
-      return checkItem(item) === checkItem(groceryItem);
+    const filtered = props.list.filter((existingItem) => {
+      return checkItem(existingItem) === checkItem(groceryItem);
     });
 
     if (filtered.length > 0) {
-      enqueueSnackbar('Error! Item exists', { variant: 'error' });
+      enqueueSnackbar('This item is already on your list', {
+        variant: 'error',
+      });
     } else {
       db.collection(userToken).add({ formData });
       setGroceryItem('');
