@@ -41,7 +41,7 @@ const ShareToken = (props) => {
       <p>Join an existing shopping list by entering a three word token.</p>
       <form id="shareToken" onSubmit={onSubmitHandler}>
         <label htmlFor="shareToken">Share token</label>
-        <input type="text" onChange={onChangeHander} required />
+        <input type="text" onChange={onChangeHandler} required />
         <input type="submit" value="Join an existing list" />
       </form>
     </>
