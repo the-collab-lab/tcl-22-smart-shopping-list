@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import firebase from './lib/firebase';
 import { db } from './lib/firebase';
-import { useCollection } from 'react-firebase-hooks/firestore';
 import { useHistory } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 
