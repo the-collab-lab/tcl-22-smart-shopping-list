@@ -28,7 +28,7 @@ const ShareToken = (props) => {
   };
 
   // 2. Create change function that keeps track of user input
-  const onChangeHander = (event) => {
+  const onChangeHandler = (event) => {
     setShareToken(event.target.value);
   };
 
