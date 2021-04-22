@@ -4,7 +4,6 @@ import { useSnackbar } from 'notistack';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
-  const userToken = localStorage.getItem('userToken');
   const [itemFreq, setItemFreq] = useState(7);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -38,7 +37,7 @@ function AddItems(props) {
         variant: 'error',
       });
     } else {
-      db.collection(userToken).add({ formData });
+      db.collection(props.userToken).add({ formData });
       setGroceryItem('');
       setItemFreq(7);
     }
