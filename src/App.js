@@ -8,7 +8,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { db } from './lib/firebase';
-// import { useCollection } from 'react-firebase-hooks/firestore';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { SnackbarProvider } from 'notistack';
 
 import AddItems from './AddItems';
@@ -16,41 +16,21 @@ import ItemList from './ItemList';
 import Welcome from './Welcome';
 
 function App() {
-  const [list, setList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [hasToken, setToken] = useState(null);
 
-  const [hasToken, setToken] = useState(localStorage.getItem('userToken'));
-
-  // const [value, loading, error] = useCollection(db.collection(hasToken), {
-  //       snapshotListenOptions: { includeMetadataChanges: true },
-  //     });
-
+  // This is listening to see if there there is `hasToken`
+  // Once we have a value, then we call `setToken` and are redirected to the list
   useEffect(() => {
-    const unsubscribe =
-      hasToken &&
-      db.collection(hasToken).onSnapshot((snapshot) => {
-        if (snapshot.size) {
-          setList(
-            snapshot.docs.map((doc) =>
-              JSON.stringify(doc.data()['formData']['itemName']).replace(
-                /['"]+/g,
-                '',
-              ),
-            ),
-          );
-          setError(null);
-          setLoading(false);
-        } else {
-          setError("Can't fetch list items");
-          setLoading(false);
-        }
-      });
+    const user = localStorage.getItem('userToken');
+    user && setToken(user);
+  }, [hasToken]);
 
-    return () => {
-      unsubscribe();
-    };
-  });
+  const [list, loading, error] = useCollection(
+    db.collection(hasToken || 'defaultValue'), // default value to prevent failure
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    },
+  );
 
   return (
     <Router>
