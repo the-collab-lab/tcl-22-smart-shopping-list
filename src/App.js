@@ -48,8 +48,8 @@ function App() {
   }, [token]);
 
   return (
-    <Router>
-      <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider maxSnack={3}>
+      <Router>
         <div className="App">
           <h1>Shopping app</h1>
           <Switch>
@@ -104,8 +104,8 @@ function App() {
             </ul>
           </nav>
         </div>
-      </SnackbarProvider>
-    </Router>
+      </Router>
+    </SnackbarProvider>
   );
 }
 
