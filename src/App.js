@@ -17,16 +17,14 @@ import Welcome from './Welcome';
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken'));
   const [list, setList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const unsubscribe = () => {
-      setError(null);
       try {
         token
           ? db.collection(token).onSnapshot((snapshot) => {
-              setLoading(true);
               const newList = [];
               snapshot.forEach((doc) => {
                 // This seems to work, while snapshot.map doesn't
@@ -41,7 +39,7 @@ function App() {
               setError(null);
               setLoading(false);
             })
-          : setError("Oops, you don't have a shopping list");
+          : setLoading(false);
       } catch (error) {
         setError("Can't connect to the database");
         setLoading(false);
