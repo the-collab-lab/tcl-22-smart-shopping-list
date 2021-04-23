@@ -21,30 +21,30 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let unsubscribe;
-    try {
-      unsubscribe = db.collection(token).onSnapshot((snapshot) => {
-        const newList = [];
-        snapshot.forEach((doc) => {
-          // This seems to work, while snapshot.map doesn't
-          newList.push(
-            JSON.stringify(doc.data()['formData']['itemName']).replace(
-              /['"]+/g,
-              '',
-            ),
-          );
+    const unsubscribe = () => {
+      try {
+        db.collection(token).onSnapshot((snapshot) => {
+          const newList = [];
+          snapshot.forEach((doc) => {
+            // This seems to work, while snapshot.map doesn't
+            newList.push(
+              JSON.stringify(doc.data()['formData']['itemName']).replace(
+                /['"]+/g,
+                '',
+              ),
+            );
+          });
+          setList(newList);
+          setError(null);
+          setLoading(false);
         });
-        setList(newList);
-        setError(null);
+      } catch (error) {
+        console.log({ error });
+        setError("Can't connect to the database");
         setLoading(false);
-      });
-    } catch (error) {
-      setError("Can't connect to the database");
-      setLoading(false);
-    }
-    return () => {
-      unsubscribe();
+      }
     };
+    return unsubscribe();
   }, [token]);
 
   return (
