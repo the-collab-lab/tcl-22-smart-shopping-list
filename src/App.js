@@ -22,6 +22,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = () => {
+      setError(null);
       try {
         token
           ? db.collection(token).onSnapshot((snapshot) => {
