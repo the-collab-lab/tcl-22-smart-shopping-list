@@ -3,8 +3,8 @@ import React from 'react';
 function ItemList(props) {
   return (
     <div>
-      {props.error && <strong>Error: {JSON.stringify(props.error)}</strong>}
       {props.loading && <span>Collection: Loading...</span>}
+      {props.error && !props.loading && <strong>Error: {props.error}</strong>}
       {props.list && props.list.length > 0 && (
         <>
           <h2>Shopping List:</h2>
