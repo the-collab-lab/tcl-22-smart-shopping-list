@@ -8,7 +8,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { db } from './lib/firebase';
-// import { useCollection } from 'react-firebase-hooks/firestore';
 import { SnackbarProvider } from 'notistack';
 
 import AddItems from './AddItems';
