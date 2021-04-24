@@ -40,6 +40,9 @@ function AddItems(props) {
       db.collection(props.userToken).add({ formData });
       setGroceryItem('');
       setItemFreq(7);
+      enqueueSnackbar(`${groceryItem} successfully added`, {
+        variant: 'success',
+      });
     }
   };
 
