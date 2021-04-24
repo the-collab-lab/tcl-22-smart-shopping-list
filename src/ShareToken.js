@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { db } from './lib/firebase';
-import { useHistory } from 'react-router-dom';
 import { withSnackbar } from 'notistack';
 
 const ShareToken = (props) => {
   const [shareToken, setShareToken] = useState(null);
 
   // 1. Make a on submit function where we pull list of collections
-  let history = useHistory();
   const onSubmitHandler = (event) => {
     event.preventDefault();
     db.collection(shareToken)
@@ -21,9 +19,7 @@ const ShareToken = (props) => {
           props.enqueueSnackbar('Success', {
             variant: 'success',
           });
-          localStorage.setItem('userToken', shareToken);
-          props.setToken(shareToken);
-          history.push('/list');
+          props.updateToken(shareToken);
         }
       });
   };
