@@ -22,6 +22,7 @@ const ShareToken = (props) => {
             variant: 'success',
           });
           localStorage.setItem('userToken', shareToken);
+          props.setToken(shareToken);
           history.push('/list');
         }
       });
