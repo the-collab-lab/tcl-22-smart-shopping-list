@@ -48,8 +48,6 @@ function App() {
     return unsubscribe();
   }, [token]);
 
-  console.log('user token:', token);
-
   return (
     <SnackbarProvider maxSnack={3}>
       <Router>
