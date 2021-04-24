@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { db } from './lib/firebase';
+import { useSnackbar } from 'notistack';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
-  const userToken = localStorage.getItem('userToken');
   const [itemFreq, setItemFreq] = useState(7);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const updateGroceryItem = (event) => {
     setGroceryItem(event.target.value);
+  };
+
+  const checkItem = (item) => {
+    const itemLetters = item.toLowerCase().split('');
+    const itemLettersFilt = itemLetters.filter((l) => {
+      return /[a-z|\s]/.test(l);
+    });
+    return itemLettersFilt.join('');
   };
 
   const submitGroceryItem = (event) => {
@@ -17,9 +27,20 @@ function AddItems(props) {
       frequency: itemFreq,
       lastPurchaseDate: null,
     };
-    db.collection(userToken).add({ formData });
-    setGroceryItem('');
-    setItemFreq(7);
+
+    const filtered = props.list.filter((existingItem) => {
+      return checkItem(existingItem) === checkItem(groceryItem);
+    });
+
+    if (filtered.length > 0) {
+      enqueueSnackbar('This item is already on your list', {
+        variant: 'error',
+      });
+    } else {
+      db.collection(props.userToken).add({ formData });
+      setGroceryItem('');
+      setItemFreq(7);
+    }
   };
 
   const radioBtnHandler = (event) => {

@@ -1,28 +1,16 @@
 import React from 'react';
-import { db } from './lib/firebase';
-import { useCollection } from 'react-firebase-hooks/firestore';
 
-function ItemList() {
-  const userToken = localStorage.getItem('userToken');
-  const [value, loading, error] = useCollection(db.collection(userToken), {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
-
+function ItemList(props) {
   return (
     <div>
-      {error && <strong>Error: {JSON.stringify(error)}</strong>}
-      {loading && <span>Collection: Loading...</span>}
-      {value && (
+      {props.loading && <span>Collection: Loading...</span>}
+      {props.error && !props.loading && <strong>Error: {props.error}</strong>}
+      {props.list && props.list.length > 0 && (
         <>
           <h2>Shopping List:</h2>
           <ul>
-            {value.docs.map((doc) => (
-              <li key={doc.id}>
-                {JSON.stringify(doc.data()['formData']['itemName']).replace(
-                  /['"]+/g,
-                  '',
-                )}
-              </li>
+            {props.list.map((item, ind) => (
+              <li key={ind}>{item}</li>
             ))}
           </ul>
         </>
