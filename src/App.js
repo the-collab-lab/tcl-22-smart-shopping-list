@@ -48,6 +48,11 @@ function App() {
     return unsubscribe();
   }, [token]);
 
+  const updateToken = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem('userToken', newToken);
+  };
+
   return (
     <SnackbarProvider maxSnack={3}>
       <Router>
@@ -64,7 +69,7 @@ function App() {
               {token ? (
                 <Redirect to="/list" />
               ) : (
-                <Welcome setToken={setToken} />
+                <Welcome updateToken={updateToken} />
               )}
             </Route>
           </Switch>
