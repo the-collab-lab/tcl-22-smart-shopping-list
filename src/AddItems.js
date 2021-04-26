@@ -29,7 +29,7 @@ function AddItems(props) {
     };
 
     const filtered = props.list.filter((existingItem) => {
-      return checkItem(existingItem) === checkItem(groceryItem);
+      return checkItem(existingItem.itemName) === checkItem(groceryItem);
     });
 
     if (filtered.length > 0) {
