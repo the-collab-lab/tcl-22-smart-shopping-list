@@ -2,12 +2,6 @@ import React from 'react';
 import Item from './Item';
 
 function ItemList(props) {
-  // Add function for when item is checked as purchased
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <div>
       {props.loading && <span>Collection: Loading...</span>}
@@ -19,6 +13,7 @@ function ItemList(props) {
             <ul>
               {props.list.map((item) => (
                 <Item
+                  key={item.id}
                   id={item.id}
                   itemName={item.itemName}
                   lastPurchaseDate={item.lastPurchaseDate}
