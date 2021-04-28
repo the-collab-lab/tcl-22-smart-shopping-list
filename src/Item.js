@@ -3,26 +3,30 @@ import { db } from './lib/firebase';
 
 function Item(props) {
   const [checked, setChecked] = useState(false);
+  const { purchaseDates } = props;
 
   useEffect(() => {
-    // setChecked(props.lastPurchaseDate && true);
-    if (props.lastPurchaseDate) {
-      const timeChecked = 86400; //Change this value if you don't want to wait 24 hrs
-      const timeElapsed = Date.now() / 1000 - props.lastPurchaseDate.seconds;
+    if (purchaseDates[purchaseDates.length - 1]) {
+      const timeChecked = 86400; // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
+      const timeElapsed =
+        Date.now() / 1000 - purchaseDates[purchaseDates.length - 1].seconds;
       setChecked(timeElapsed <= timeChecked && true);
     }
-  }, [props.lastPurchaseDate]);
+  }, [purchaseDates]);
 
   const handleClick = () => {
     if (checked) {
+      purchaseDates.pop();
       db.collection(props.userToken).doc(props.id).update({
-        'formData.lastPurchaseDate': null,
+        'formData.purchaseDates': purchaseDates,
       });
     } else {
       const date = new Date();
-      db.collection(props.userToken).doc(props.id).update({
-        'formData.lastPurchaseDate': date,
-      });
+      db.collection(props.userToken)
+        .doc(props.id)
+        .update({
+          'formData.purchaseDates': [...purchaseDates, date],
+        });
     }
     setChecked(!checked);
   };

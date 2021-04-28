@@ -16,7 +16,7 @@ function ItemList(props) {
                   key={item.id}
                   id={item.id}
                   itemName={item.itemName}
-                  lastPurchaseDate={item.lastPurchaseDate}
+                  purchaseDates={item.purchaseDates}
                   userToken={props.userToken}
                 />
               ))}

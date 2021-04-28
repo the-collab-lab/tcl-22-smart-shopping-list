@@ -25,7 +25,7 @@ function AddItems(props) {
     const formData = {
       itemName: groceryItem,
       frequency: itemFreq,
-      lastPurchaseDate: null,
+      purchaseDates: [null],
     };
 
     const filtered = props.list.filter((existingItem) => {

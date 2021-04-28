@@ -32,7 +32,7 @@ function App() {
                 const obj = {
                   id: doc.id,
                   itemName: doc.data()['formData']['itemName'],
-                  lastPurchaseDate: doc.data()['formData']['lastPurchaseDate'],
+                  purchaseDates: doc.data()['formData']['purchaseDates'],
                 };
                 newList.push(obj);
               });
