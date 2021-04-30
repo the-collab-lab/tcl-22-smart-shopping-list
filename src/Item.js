@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { db } from './lib/firebase';
 
 function Item(props) {
+  const { purchaseDates, userToken, itemName, id } = props;
   const [checked, setChecked] = useState(false);
-  const { purchaseDates } = props;
 
   useEffect(() => {
-    if (purchaseDates[purchaseDates.length - 1]) {
-      const timeChecked = 86400; // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
+    if (purchaseDates.length !== 0) {
+      const timeChecked = 30; // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
       const timeElapsed =
         Date.now() / 1000 - purchaseDates[purchaseDates.length - 1].seconds;
+      // Check if the elapsed time since last purchase was within timeChecked value & uncheck if exceeded timeChecked value
       setChecked(timeElapsed <= timeChecked && true);
     }
   }, [purchaseDates]);
@@ -17,13 +18,13 @@ function Item(props) {
   const handleClick = () => {
     if (checked) {
       purchaseDates.pop();
-      db.collection(props.userToken).doc(props.id).update({
+      db.collection(userToken).doc(id).update({
         'formData.purchaseDates': purchaseDates,
       });
     } else {
       const date = new Date();
-      db.collection(props.userToken)
-        .doc(props.id)
+      db.collection(userToken)
+        .doc(id)
         .update({
           'formData.purchaseDates': [...purchaseDates, date],
         });
@@ -31,19 +32,17 @@ function Item(props) {
     setChecked(!checked);
   };
 
-  // Check if the date of purchase was within 24hrs,
-  // If yes, disable checkbox
-
   return (
     <li>
-      <label>
+      <label htmlFor={itemName}>
         <input
           type="checkbox"
-          name={props.itemName}
+          name={itemName}
+          id={itemName}
           checked={checked}
           onChange={handleClick}
         />
-        {props.itemName}
+        {itemName}
       </label>
     </li>
   );
