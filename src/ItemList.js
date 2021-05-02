@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
 
-// 1. Add text field above shopping list
-// 2. Pass list of items that was created in issue #6 to ItemsList component
-// 3. Use item comparison function from issue #6 to filter shopping list and create a search results array
-// 4. Map through search results array and render in ItemsList
+// [filter-list] 2. Use item comparison function from issue #6 to filter shopping list and create a search results array
+// [filter-list] 3. Map through search results array and render in ItemsList
 
 function ItemList(props) {
+  const [query, setQuery] = useState('');
+  const [queryArray, setQueryArray] = useState([]);
   let history = useHistory();
   const redirect = () => {
     history.push('/additems');
+  };
+
+  useEffect(() => {
+    const newArray = props.list.filter((itemObj) => {
+      return itemObj['itemName'] === query;
+    });
+    console.log(newArray);
+    // const updateArray = () => {setQueryArray([...newArray])}
+    // updateArray()
+    setQueryArray(() => [...newArray]);
+    // return setQueryArray(props.list)
+  }, [queryArray, query, props.list]);
+
+  const changeHandler = (e) => {
+    setQuery(e.target.value);
   };
 
   return (
@@ -25,7 +40,19 @@ function ItemList(props) {
       )}
       {props.list && props.list.length > 0 && (
         <>
+          {/* [filter-list] 1. Add text field above shopping list */}
+          <label htmlFor="filter">
+            Filter Items
+            <input
+              id="filter"
+              type="text"
+              placeholder="Start typing here..."
+              value={query}
+              onChange={changeHandler}
+            />
+          </label>
           <h2>Shopping List:</h2>
+          {console.log(props.list)}
           <form>
             <ul>
               {props.list.map((item) => (
