@@ -26,14 +26,15 @@ function App() {
         token
           ? db.collection(token).onSnapshot((snapshot) => {
               const newList = [];
+              // Restructure data from array to an array of objects,
+              // with each object containing name, id and date of the last purchase
               snapshot.forEach((doc) => {
-                // This seems to work, while snapshot.map doesn't
-                newList.push(
-                  JSON.stringify(doc.data()['formData']['itemName']).replace(
-                    /['"]+/g,
-                    '',
-                  ),
-                );
+                const obj = {
+                  id: doc.id,
+                  itemName: doc.data()['formData']['itemName'],
+                  purchaseDates: doc.data()['formData']['purchaseDates'],
+                };
+                newList.push(obj);
               });
               setList(newList);
               setError(null);
@@ -60,7 +61,12 @@ function App() {
           <h1>Shopping app</h1>
           <Switch>
             <Route path="/list">
-              <ItemList list={list} loading={loading} error={error} />
+              <ItemList
+                list={list}
+                loading={loading}
+                error={error}
+                userToken={token}
+              />
             </Route>
             <Route path="/additems">
               <AddItems list={list} userToken={token} />

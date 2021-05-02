@@ -25,11 +25,11 @@ function AddItems(props) {
     const formData = {
       itemName: groceryItem,
       frequency: itemFreq,
-      lastPurchaseDate: null,
+      purchaseDates: [],
     };
 
     const filtered = props.list.filter((existingItem) => {
-      return checkItem(existingItem) === checkItem(groceryItem);
+      return checkItem(existingItem.itemName) === checkItem(groceryItem);
     });
 
     if (filtered.length > 0) {
