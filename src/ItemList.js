@@ -3,7 +3,6 @@ import React from 'react';
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
 
-
 function ItemList(props) {
   let history = useHistory();
   const redirect = () => {
@@ -26,13 +25,7 @@ function ItemList(props) {
           <form>
             <ul>
               {props.list.map((item) => (
-                <Item
-                  key={item.id}
-                  id={item.id}
-                  itemName={item.itemName}
-                  purchaseDates={item.purchaseDates}
-                  userToken={props.userToken}
-                />
+                <Item key={item.id} userToken={props.userToken} item={item} />
               ))}
             </ul>
           </form>
