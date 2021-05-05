@@ -9,7 +9,6 @@
  * @return {Number} Estimated number of days until the next purchase
  */
 const calculateEstimate = (lastEstimate, latestInterval, numberOfPurchases) => {
-  console.log(lastEstimate, latestInterval, numberOfPurchases);
   if (numberOfPurchases >= 2) {
     if (isNaN(lastEstimate)) {
       lastEstimate = 14;

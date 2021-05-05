@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "date-fns": "^2.21.2",
     "firebase": "^8.3.3",
     "notistack": "^1.0.6",
     "react": "^17.0.1",
