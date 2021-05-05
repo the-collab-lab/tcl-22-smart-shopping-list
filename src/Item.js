@@ -25,15 +25,19 @@ function Item({ userToken, item }) {
       });
     } else {
       const newDate = new Date();
-      const lastDate = fromUnixTime(
-        purchaseDates[purchaseDates.length - 1].seconds,
-      );
       const newDates = [...purchaseDates, newDate];
-      const latestInterval = intervalToDuration({
-        start: lastDate,
-        end: newDate,
-      }).days;
       const numberOfPurchases = newDates.length;
+      let latestInterval = null;
+
+      if (numberOfPurchases >= 2) {
+        const lastDate = fromUnixTime(
+          purchaseDates[purchaseDates.length - 1].seconds,
+        );
+        latestInterval = intervalToDuration({
+          start: lastDate,
+          end: newDate,
+        }).days;
+      }
       const newInterval = estimates(
         nextEstimate,
         latestInterval,
