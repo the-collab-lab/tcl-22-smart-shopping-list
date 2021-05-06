@@ -14,9 +14,37 @@ function ItemList(props) {
 
   useEffect(() => {
     // [filter-list] Remove accidental space character from query and make lowercase
-    const transformQuery = query.toLowerCase().trim();
+    const transformQuery = () => {
+      let transformedQuery = query.toLowerCase().trim();
+      const regexSpecialChars = [
+        '[',
+        '\\',
+        '^',
+        '$',
+        '.',
+        '|',
+        '?',
+        '*',
+        '+',
+        '(',
+        ')',
+      ];
 
-    const filterRegex = new RegExp(transformQuery);
+      if (
+        regexSpecialChars.includes(
+          transformedQuery[transformedQuery.length - 1],
+        )
+      ) {
+        transformedQuery = transformedQuery.slice(
+          0,
+          transformedQuery.length - 1,
+        );
+      }
+      console.log(transformedQuery);
+      return transformedQuery;
+    };
+
+    const filterRegex = new RegExp(transformQuery());
 
     // [filter-list] 2. Comparison function to filter shopping list and create a search results array
     const resultsArray = props.list.filter((itemObj) => {
