@@ -40,7 +40,6 @@ function ItemList(props) {
           transformedQuery.length - 1,
         );
       }
-      console.log(transformedQuery);
       return transformedQuery;
     };
 
