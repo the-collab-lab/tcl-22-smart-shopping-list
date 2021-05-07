@@ -56,7 +56,11 @@ function ItemList(props) {
             />
           </label>
           {/* [filter-list] 4. Add 'X' button for user to clear query field */}
-          {query.length !== 0 && <button onClick={clickHandler}>X</button>}
+          {query.length !== 0 && (
+            <button aria-label="clear field" onClick={clickHandler}>
+              X
+            </button>
+          )}
           <h2>Shopping List:</h2>
           <form>
             <ul>
