@@ -14,11 +14,11 @@ function ItemList(props) {
 
   useEffect(() => {
     // [filter-list] 2. Comparison function to filter shopping list and create a search results array
-    // [filter-list] (Remove accidental space character from query, make lowercase, and ignore non word characters)
+    // [filter-list] (Remove accidental space character from query, make lowercase, and prevent regex errors)
     const resultsArray = props.list.filter((itemObj) => {
       return itemObj['itemName']
         .toLowerCase()
-        .replace('/[W_]/g', '')
+        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
         .includes(query.toLowerCase().trim());
     });
     return setQueryArray([...resultsArray]);
