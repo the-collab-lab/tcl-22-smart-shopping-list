@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from './lib/firebase';
 import estimates from './lib/estimates';
-import { intervalToDuration, fromUnixTime } from 'date-fns';
+import { differenceInDays, fromUnixTime } from 'date-fns';
 
 function Item({ userToken, item }) {
   const { itemName, id, purchaseDates, purchaseEstimates } = item;
@@ -28,24 +28,21 @@ function Item({ userToken, item }) {
       });
     } else {
       // Add new date and estimate to the database:
-      const lastEstimate =
-        purchaseEstimates.length > 0
-          ? purchaseEstimates[purchaseEstimates.length - 1]
-          : null;
-
       const newDate = new Date();
       const newDates = [...purchaseDates, newDate];
       const numberOfPurchases = newDates.length;
-      let latestInterval = null;
+      let lastEstimate;
+      let latestInterval;
 
       if (numberOfPurchases >= 2) {
         const lastDate = fromUnixTime(
           purchaseDates[purchaseDates.length - 1].seconds,
         );
-        latestInterval = intervalToDuration({
-          start: lastDate,
-          end: newDate,
-        }).days;
+        latestInterval = differenceInDays(newDate, lastDate);
+
+        if (purchaseEstimates.length > 0) {
+          latestInterval = purchaseEstimates[purchaseEstimates.length - 1];
+        }
       }
       const newInterval = estimates(
         lastEstimate,
