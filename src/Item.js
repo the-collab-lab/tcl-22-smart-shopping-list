@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { db } from './lib/firebase';
 import estimates from './lib/estimates';
 import { intervalToDuration, fromUnixTime } from 'date-fns';
+import firebase from 'firebase/app';
 
 function Item({ userToken, item }) {
-  const { purchaseDates, itemName, id, nextEstimate } = item;
+  const { purchaseDates, itemName, id, purchaseEstimates } = item;
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -20,8 +21,10 @@ function Item({ userToken, item }) {
   const handleClick = () => {
     if (checked) {
       purchaseDates.pop();
+      purchaseEstimates.pop();
       db.collection(userToken).doc(id).update({
         'formData.purchaseDates': purchaseDates,
+        'formData.purchaseEstimates ': purchaseEstimates,
       });
     } else {
       const newDate = new Date();
@@ -38,15 +41,24 @@ function Item({ userToken, item }) {
           end: newDate,
         }).days;
       }
+      const lastEstimate =
+        purchaseEstimates.length > 0
+          ? purchaseEstimates[purchaseEstimates.length - 1]
+          : null;
       const newInterval = estimates(
-        nextEstimate,
+        lastEstimate,
         latestInterval,
         numberOfPurchases,
       );
-      db.collection(userToken).doc(id).update({
-        'formData.purchaseDates': newDates,
-        'formData.nextEstimate': newInterval,
-      });
+
+      db.collection(userToken)
+        .doc(id)
+        .update({
+          'formData.purchaseDates': newDates,
+          'formData.purchaseEstimates ': firebase.firestore.FieldValue.arrayUnion(
+            newInterval,
+          ),
+        });
     }
     setChecked(!checked);
   };
