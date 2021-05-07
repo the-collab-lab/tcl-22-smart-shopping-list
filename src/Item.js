@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { db } from './lib/firebase';
 import estimates from './lib/estimates';
 import { intervalToDuration, fromUnixTime } from 'date-fns';
-import firebase from 'firebase/app';
 
 function Item({ userToken, item }) {
-  const { purchaseDates, itemName, id, purchaseEstimates } = item;
+  const { itemName, id, purchaseDates, purchaseEstimates } = item;
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -20,13 +19,20 @@ function Item({ userToken, item }) {
 
   const handleClick = () => {
     if (checked) {
+      // Remove the latest purchase date and estimate from the database:
       purchaseDates.pop();
-      purchaseEstimates.pop();
+      purchaseEstimates.length > 0 && purchaseEstimates.pop();
       db.collection(userToken).doc(id).update({
         'formData.purchaseDates': purchaseDates,
-        'formData.purchaseEstimates ': purchaseEstimates,
+        'formData.purchaseEstimates': purchaseEstimates,
       });
     } else {
+      // Add new date and estimate to the database:
+      const lastEstimate =
+        purchaseEstimates.length > 0
+          ? purchaseEstimates[purchaseEstimates.length - 1]
+          : null;
+
       const newDate = new Date();
       const newDates = [...purchaseDates, newDate];
       const numberOfPurchases = newDates.length;
@@ -41,24 +47,16 @@ function Item({ userToken, item }) {
           end: newDate,
         }).days;
       }
-      const lastEstimate =
-        purchaseEstimates.length > 0
-          ? purchaseEstimates[purchaseEstimates.length - 1]
-          : null;
       const newInterval = estimates(
         lastEstimate,
         latestInterval,
         numberOfPurchases,
       );
-
-      db.collection(userToken)
-        .doc(id)
-        .update({
-          'formData.purchaseDates': newDates,
-          'formData.purchaseEstimates ': firebase.firestore.FieldValue.arrayUnion(
-            newInterval,
-          ),
-        });
+      newInterval && purchaseEstimates.push(newInterval);
+      db.collection(userToken).doc(id).update({
+        'formData.purchaseDates': newDates,
+        'formData.purchaseEstimates': purchaseEstimates,
+      });
     }
     setChecked(!checked);
   };
