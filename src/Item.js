@@ -8,13 +8,26 @@ function Item({ userToken, item }) {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
+    // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
+    const timeChecked = 30;
+    let timeoutID;
+
     if (purchaseDates.length !== 0) {
-      const timeChecked = 30; // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
       const timeElapsed =
         Date.now() / 1000 - purchaseDates[purchaseDates.length - 1].seconds;
+
       // Check if the elapsed time since last purchase was within timeChecked value & uncheck if exceeded timeChecked value
-      setChecked(timeElapsed <= timeChecked && true);
+      if (timeElapsed <= timeChecked) {
+        setChecked(true);
+        // Clear the checkbox when the rest of the timeChecked interval has passed:
+        timeoutID = setTimeout(
+          () => setChecked(false),
+          (timeChecked - timeElapsed) * 1000,
+        );
+      }
     }
+
+    return () => clearTimeout(timeoutID);
   }, [purchaseDates]);
 
   const handleClick = () => {
