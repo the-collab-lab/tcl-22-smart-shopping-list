@@ -4,7 +4,7 @@ import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 
 function Item({ userToken, item }) {
-  const { itemName, id, purchaseDates, purchaseEstimates } = item;
+  const { itemName, id, purchaseDates, purchaseEstimates  = [] } = item;
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
