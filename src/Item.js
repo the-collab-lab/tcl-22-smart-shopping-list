@@ -7,7 +7,7 @@ function Item(props) {
 
   useEffect(() => {
     if (purchaseDates.length !== 0) {
-      const timeChecked = 86400; // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
+      const timeChecked = localStorage.getItem('expirationDuration') || 86400; // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
       const timeElapsed =
         Date.now() / 1000 - purchaseDates[purchaseDates.length - 1].seconds;
       // Check if the elapsed time since last purchase was within timeChecked value & uncheck if exceeded timeChecked value
