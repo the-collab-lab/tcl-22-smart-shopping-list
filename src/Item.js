@@ -9,7 +9,7 @@ function Item({ userToken, item }) {
 
   useEffect(() => {
     // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
-    const timeChecked = 30;
+    const timeChecked = 86400;
     let timeoutID;
 
     if (purchaseDates.length !== 0) {
