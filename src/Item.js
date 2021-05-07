@@ -54,7 +54,7 @@ function Item({ userToken, item }) {
         latestInterval = differenceInDays(newDate, lastDate);
 
         if (purchaseEstimates.length > 0) {
-          latestInterval = purchaseEstimates[purchaseEstimates.length - 1];
+          lastEstimate = purchaseEstimates[purchaseEstimates.length - 1];
         }
       }
       const newInterval = estimates(
