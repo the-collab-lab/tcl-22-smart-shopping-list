@@ -33,6 +33,9 @@ function App() {
                   id: doc.id,
                   itemName: doc.data()['formData']['itemName'],
                   purchaseDates: doc.data()['formData']['purchaseDates'],
+                  purchaseEstimates: doc.data()['formData'][
+                    'purchaseEstimates'
+                  ],
                 };
                 newList.push(obj);
               });

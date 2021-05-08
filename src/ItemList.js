@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
 
-// [filter-list] 5. Add function for 'X' button to clear query value when clicked
-
 function ItemList(props) {
   const [query, setQuery] = useState('');
   const [queryArray, setQueryArray] = useState([]);
@@ -64,16 +62,8 @@ function ItemList(props) {
           <h2>Shopping List:</h2>
           <form>
             <ul>
-              {/* [filter-list] 3. Map through search results array and render in
-              ItemsList */}
-              {queryArray.map((item) => (
-                <Item
-                  key={item.id}
-                  id={item.id}
-                  itemName={item.itemName}
-                  purchaseDates={item.purchaseDates}
-                  userToken={props.userToken}
-                />
+              {props.list.map((item) => (
+                <Item key={item.id} userToken={props.userToken} item={item} />
               ))}
             </ul>
           </form>

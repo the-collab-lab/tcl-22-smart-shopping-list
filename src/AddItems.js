@@ -26,6 +26,7 @@ function AddItems(props) {
       itemName: groceryItem,
       frequency: itemFreq,
       purchaseDates: [],
+      purchaseEstimates: [],
     };
 
     const filtered = props.list.filter((existingItem) => {
