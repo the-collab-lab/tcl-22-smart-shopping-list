@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
+import filter from './lib/filter';
 
 function ItemList(props) {
   const [query, setQuery] = useState('');
@@ -12,13 +13,7 @@ function ItemList(props) {
 
   useEffect(() => {
     // [filter-list] 2. Comparison function to filter shopping list and create a search results array
-    // [filter-list] (Remove accidental space character from query, make lowercase, and prevent regex errors)
-    const resultsArray = props.list.filter((itemObj) => {
-      return itemObj['itemName']
-        .toLowerCase()
-        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-        .includes(query.toLowerCase().trim());
-    });
+    const resultsArray = filter(props.list, query, false);
     return setQueryArray([...resultsArray]);
   }, [query, props.list]);
 
@@ -62,7 +57,7 @@ function ItemList(props) {
           <h2>Shopping List:</h2>
           <form>
             <ul>
-              {props.list.map((item) => (
+              {queryArray.map((item) => (
                 <Item key={item.id} userToken={props.userToken} item={item} />
               ))}
             </ul>

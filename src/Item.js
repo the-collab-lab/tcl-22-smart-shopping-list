@@ -4,12 +4,12 @@ import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 
 function Item({ userToken, item }) {
-  const { itemName, id, purchaseDates, purchaseEstimates  = [] } = item;
+  const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
-    const timeChecked = 86400;
+    const timeChecked = localStorage.getItem('expirationDuration', 10) || 86400;
     let timeoutID;
 
     if (purchaseDates.length !== 0) {
