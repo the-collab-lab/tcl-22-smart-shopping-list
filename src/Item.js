@@ -4,7 +4,13 @@ import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 
 function Item({ userToken, item }) {
-  const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
+  const {
+    itemName,
+    id,
+    purchaseDates,
+    purchaseEstimates = [],
+    daysRemaining,
+  } = item;
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -81,7 +87,7 @@ function Item({ userToken, item }) {
           checked={checked}
           onChange={handleClick}
         />
-        {itemName}
+        {`${itemName} ${daysRemaining ? '(' + daysRemaining + ' days)' : ''}`}
       </label>
     </li>
   );
