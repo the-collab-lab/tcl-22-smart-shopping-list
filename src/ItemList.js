@@ -18,7 +18,6 @@ function ItemList(props) {
   };
 
   useEffect(() => {
-    console.log('useEffect running');
     const resultsObj = {
       week: [],
       month: [],
@@ -37,6 +36,7 @@ function ItemList(props) {
         const lastEstimate =
           item.purchaseEstimates[item.purchaseEstimates.length - 1];
         const daysRemaining = lastEstimate - lastInterval;
+        item.daysRemaining = daysRemaining;
 
         if (lastInterval >= 2 * lastEstimate) {
           resultsObj['inactive'].push(item);
@@ -55,26 +55,37 @@ function ItemList(props) {
       const newArray = filter(value, query, false);
       newArray.length > 0 &&
         newArray.sort((a, b) => {
-          const stringA = a['itemName'];
-          const stringB = b['itemName'];
-          return stringA.localeCompare(stringB);
+          const alphabetize = (a, b) => {
+            const stringA = a['itemName'];
+            const stringB = b['itemName'];
+            return stringA.localeCompare(stringB);
+          };
+          if (key === 'inactive') {
+            return alphabetize(a, b);
+          } else {
+            const dateA = a.daysRemaining;
+            const dateB = b.daysRemaining;
+            if (dateA === dateB) {
+              return alphabetize(a, b);
+            } else {
+              return dateA - dateB;
+              // }
+            }
+          }
         });
       resultsObj[key] = newArray;
     });
 
     setQueryObj(resultsObj);
-  }, [query, props.list, queryObj]);
+  }, [query, props.list]);
 
   const changeHandler = (e) => {
-    console.log('query', e.target.value);
     setQuery(e.target.value);
   };
 
   const clickHandler = () => {
     setQuery('');
   };
-
-  console.log('component is working');
 
   return (
     <div>
