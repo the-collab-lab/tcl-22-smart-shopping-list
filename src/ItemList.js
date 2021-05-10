@@ -2,28 +2,79 @@ import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
 import filter from './lib/filter';
+import { differenceInDays, fromUnixTime } from 'date-fns';
 
 function ItemList(props) {
   const [query, setQuery] = useState('');
-  const [queryArray, setQueryArray] = useState([]);
+  const [queryObj, setQueryObj] = useState({
+    week: [],
+    month: [],
+    longer: [],
+    inactive: [],
+  });
   let history = useHistory();
   const redirect = () => {
     history.push('/additems');
   };
 
   useEffect(() => {
-    // [filter-list] 2. Comparison function to filter shopping list and create a search results array
-    const resultsArray = filter(props.list, query, false);
-    return setQueryArray([...resultsArray]);
-  }, [query, props.list]);
+    console.log('useEffect running');
+    const resultsObj = {
+      week: [],
+      month: [],
+      longer: [],
+      inactive: [],
+    };
+
+    props.list.forEach((item) => {
+      if (item.purchaseDates.length < 1 || item.purchaseEstimates.length < 1) {
+        resultsObj['inactive'].push(item);
+      } else {
+        const lastPurchase = fromUnixTime(
+          item.purchaseDates[item.purchaseDates.length - 1].seconds,
+        );
+        const lastInterval = differenceInDays(Date.now(), lastPurchase);
+        const lastEstimate =
+          item.purchaseEstimates[item.purchaseEstimates.length - 1];
+        const daysRemaining = lastEstimate - lastInterval;
+
+        if (lastInterval >= 2 * lastEstimate) {
+          resultsObj['inactive'].push(item);
+        } else if (daysRemaining <= 7) {
+          resultsObj['week'].push(item);
+        } else if (daysRemaining <= 30) {
+          resultsObj['month'].push(item);
+        } else {
+          resultsObj['longer'].push(item);
+        }
+      }
+    });
+
+    Object.entries(resultsObj).forEach(([key, value]) => {
+      // [filter-list] 2. Comparison function to filter shopping list and create a search results array
+      const newArray = filter(value, query, false);
+      newArray.length > 0 &&
+        newArray.sort((a, b) => {
+          const stringA = a['itemName'];
+          const stringB = b['itemName'];
+          return stringA.localeCompare(stringB);
+        });
+      resultsObj[key] = newArray;
+    });
+
+    setQueryObj(resultsObj);
+  }, [query, props.list, queryObj]);
 
   const changeHandler = (e) => {
+    console.log('query', e.target.value);
     setQuery(e.target.value);
   };
 
   const clickHandler = () => {
     setQuery('');
   };
+
+  console.log('component is working');
 
   return (
     <div>
@@ -56,11 +107,38 @@ function ItemList(props) {
           )}
           <h2>Shopping List:</h2>
           <form>
-            <ul>
-              {queryArray.map((item) => (
-                <Item key={item.id} userToken={props.userToken} item={item} />
-              ))}
-            </ul>
+            {queryObj['week'].length > 0 && (
+              <ul>
+                <h3>Items to buy in the next week:</h3>
+                {queryObj['week'].map((item) => (
+                  <Item key={item.id} userToken={props.userToken} item={item} />
+                ))}
+              </ul>
+            )}
+            {queryObj['month'].length > 0 && (
+              <ul>
+                <h3>Items to buy in the next month:</h3>
+                {queryObj['month'].map((item) => (
+                  <Item key={item.id} userToken={props.userToken} item={item} />
+                ))}
+              </ul>
+            )}
+            {queryObj['longer'].length > 0 && (
+              <ul>
+                <h3>Items to buy in the distant future:</h3>
+                {queryObj['longer'].map((item) => (
+                  <Item key={item.id} userToken={props.userToken} item={item} />
+                ))}
+              </ul>
+            )}
+            {queryObj['inactive'].length > 0 && (
+              <ul>
+                <h3>Purchases we can't predict yet:</h3>
+                {queryObj['inactive'].map((item) => (
+                  <Item key={item.id} userToken={props.userToken} item={item} />
+                ))}
+              </ul>
+            )}
           </form>
         </>
       )}
