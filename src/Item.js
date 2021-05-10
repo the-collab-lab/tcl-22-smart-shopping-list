@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { db } from './lib/firebase';
 import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
+import { Modal } from '@material-ui/core';
 
 function Item({ userToken, item }) {
-  const { itemName, id, purchaseDates, purchaseEstimates  = [] } = item;
+  const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
   const [checked, setChecked] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
@@ -71,6 +73,21 @@ function Item({ userToken, item }) {
     setChecked(!checked);
   };
 
+  const handleDelete = () => {
+    setOpenModal(true);
+    // db.collection(userToken).doc(id).delete().then(() => {
+    //   console.log("it worked!")
+    // });
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+
   return (
     <li>
       <label htmlFor={itemName}>
@@ -83,6 +100,20 @@ function Item({ userToken, item }) {
         />
         {itemName}
       </label>
+      <button type="button" onClick={handleDelete}>
+        X
+      </button>
+
+      <Modal
+        open={openModal}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div>
+          <h1>Are you sure you want to delete?</h1>
+        </div>
+      </Modal>
     </li>
   );
 }
