@@ -26,7 +26,7 @@ function ItemList(props) {
     };
 
     props.list.forEach((item) => {
-      if (item.purchaseDates.length < 1 || item.purchaseEstimates.length < 1) {
+      if (item.purchaseDates.length < 1 || !(item.purchaseEstimates?.length > 0)) {
         resultsObj['inactive'].push(item);
       } else {
         const lastPurchase = fromUnixTime(
