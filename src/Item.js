@@ -3,6 +3,42 @@ import { db } from './lib/firebase';
 import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 import { Modal } from '@material-ui/core';
+import styled from 'styled-components';
+
+const StyledModal = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: white;
+  padding: 6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  max-width: 250px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ModalBtn = styled.a`
+  display: inline-block;
+  padding: 5px;
+  margin: 0.5rem 1rem;
+  width: 6rem;
+  background: transparent;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+  background: lightgray;
+  justify-content: center;
+  border: none;
+  &:hover {
+    background: darkgray;
+  }
+`;
 
 function Item({ userToken, item }) {
   const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
@@ -75,9 +111,12 @@ function Item({ userToken, item }) {
 
   const handleDelete = () => {
     setOpenModal(true);
-    // db.collection(userToken).doc(id).delete().then(() => {
-    //   console.log("it worked!")
-    // });
+    db.collection(userToken)
+      .doc(id)
+      .delete()
+      .then(() => {
+        console.log('it worked!');
+      });
   };
 
   const handleClose = () => {
@@ -100,7 +139,7 @@ function Item({ userToken, item }) {
         />
         {itemName}
       </label>
-      <button type="button" onClick={handleDelete}>
+      <button type="button" onClick={handleOpen}>
         X
       </button>
 
@@ -111,7 +150,11 @@ function Item({ userToken, item }) {
         aria-describedby="simple-modal-description"
       >
         <div>
-          <h1>Are you sure you want to delete?</h1>
+          <StyledModal>
+            <h1>Are you sure you want to delete this item?</h1>
+            <ModalBtn onClick={handleDelete}>Yes</ModalBtn>
+            <ModalBtn onClick={handleClose}>Cancel</ModalBtn>
+          </StyledModal>
         </div>
       </Modal>
     </li>
