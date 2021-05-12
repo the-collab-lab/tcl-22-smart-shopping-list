@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from './lib/firebase';
 import { useSnackbar } from 'notistack';
+import filter from './lib/filter';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
@@ -12,14 +13,6 @@ function AddItems(props) {
     setGroceryItem(event.target.value);
   };
 
-  const checkItem = (item) => {
-    const itemLetters = item.toLowerCase().split('');
-    const itemLettersFilt = itemLetters.filter((l) => {
-      return /[a-z|\s]/.test(l);
-    });
-    return itemLettersFilt.join('');
-  };
-
   const submitGroceryItem = (event) => {
     event.preventDefault();
     const formData = {
@@ -29,9 +22,7 @@ function AddItems(props) {
       purchaseEstimates: [],
     };
 
-    const filtered = props.list.filter((existingItem) => {
-      return checkItem(existingItem.itemName) === checkItem(groceryItem);
-    });
+    const filtered = filter(props.list, groceryItem, true);
 
     if (filtered.length > 0) {
       enqueueSnackbar('This item is already on your list', {
