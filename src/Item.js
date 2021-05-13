@@ -109,6 +109,7 @@ function Item({ userToken, item }) {
     setChecked(!checked);
   };
 
+  // [delete-item] 4a. If yes, then remove from firestore database
   const handleDelete = () => {
     setOpenModal(true);
     db.collection(userToken)
@@ -119,11 +120,13 @@ function Item({ userToken, item }) {
       });
   };
 
-  const handleClose = () => {
+  // [delete-item] 4b. If no, then the modal closes
+  const handleCloseModal = () => {
     setOpenModal(false);
   };
 
-  const handleOpen = () => {
+  // [delete-item] 3. Create a function that is passed to onClick which will render a mondal which asks the user 'You sure about dat?'
+  const handleOpenModal = () => {
     setOpenModal(true);
   };
 
@@ -139,13 +142,14 @@ function Item({ userToken, item }) {
         />
         {itemName}
       </label>
-      <button type="button" onClick={handleOpen}>
+      {/* // [delete-item] 1. Create a button next to each item in list */}
+      <button type="button" onClick={handleOpenModal}>
         X
       </button>
-
+      {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
       <Modal
         open={openModal}
-        onClose={handleClose}
+        onClose={handleCloseModal}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
@@ -153,7 +157,7 @@ function Item({ userToken, item }) {
           <StyledModal>
             <h1>Are you sure you want to delete this item?</h1>
             <ModalBtn onClick={handleDelete}>Yes</ModalBtn>
-            <ModalBtn onClick={handleClose}>Cancel</ModalBtn>
+            <ModalBtn onClick={handleCloseModal}>Cancel</ModalBtn>
           </StyledModal>
         </div>
       </Modal>

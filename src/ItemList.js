@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
 
-// [delete-item] 1. Create a button next to each item in list
-// [delete-item] 2. Create a function that is passed to onClick which will render a mondal which asks the user 'You sure about dat?'
-// [delete-item] 3a. If yes, then remove from firestore database
-// [delete-item] 3b. If no, then the modal closes
-
 function ItemList(props) {
   const [query, setQuery] = useState('');
   const [queryArray, setQueryArray] = useState([]);
