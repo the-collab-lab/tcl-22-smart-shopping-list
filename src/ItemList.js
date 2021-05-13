@@ -25,8 +25,12 @@ function ItemList(props) {
       inactive: [],
     };
 
+    // Separate list items into categories based on how soon they should be bought
     props.list.forEach((item) => {
-      if (item.purchaseDates.length < 1 || !(item.purchaseEstimates?.length > 0)) {
+      if (
+        item.purchaseDates.length < 1 ||
+        !(item.purchaseEstimates?.length > 0)
+      ) {
         resultsObj['inactive'].push(item);
       } else {
         const lastPurchase = fromUnixTime(
@@ -50,9 +54,11 @@ function ItemList(props) {
       }
     });
 
+    // Sort items by next purchase date and then by name, filter for search results
     Object.entries(resultsObj).forEach(([key, value]) => {
       // [filter-list] 2. Comparison function to filter shopping list and create a search results array
       const newArray = filter(value, query, false);
+
       newArray.length > 0 &&
         newArray.sort((a, b) => {
           const alphabetize = (a, b) => {
@@ -60,6 +66,7 @@ function ItemList(props) {
             const stringB = b['itemName'];
             return stringA.localeCompare(stringB);
           };
+
           if (key === 'inactive') {
             return alphabetize(a, b);
           } else {
@@ -69,7 +76,6 @@ function ItemList(props) {
               return alphabetize(a, b);
             } else {
               return dateA - dateB;
-              // }
             }
           }
         });
@@ -88,7 +94,11 @@ function ItemList(props) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        marginBottom: '5em',
+      }}
+    >
       {props.loading && <span>Collection: Loading...</span>}
       {props.error && !props.loading && <strong>Error: {props.error}</strong>}
       {props.list && props.list.length === 0 && (
@@ -117,39 +127,32 @@ function ItemList(props) {
             </button>
           )}
           <h2>Shopping List:</h2>
+
           <form>
-            {queryObj['week'].length > 0 && (
-              <ul>
-                <h3>Items to buy in the next week:</h3>
-                {queryObj['week'].map((item) => (
-                  <Item key={item.id} userToken={props.userToken} item={item} />
-                ))}
-              </ul>
-            )}
-            {queryObj['month'].length > 0 && (
-              <ul>
-                <h3>Items to buy in the next month:</h3>
-                {queryObj['month'].map((item) => (
-                  <Item key={item.id} userToken={props.userToken} item={item} />
-                ))}
-              </ul>
-            )}
-            {queryObj['longer'].length > 0 && (
-              <ul>
-                <h3>Items to buy in the distant future:</h3>
-                {queryObj['longer'].map((item) => (
-                  <Item key={item.id} userToken={props.userToken} item={item} />
-                ))}
-              </ul>
-            )}
-            {queryObj['inactive'].length > 0 && (
-              <ul>
-                <h3>Purchases we can't predict yet:</h3>
-                {queryObj['inactive'].map((item) => (
-                  <Item key={item.id} userToken={props.userToken} item={item} />
-                ))}
-              </ul>
-            )}
+            {Object.entries(queryObj).map(([key, value]) => {
+              return (
+                value.length > 0 && (
+                  <>
+                    <h3>
+                      {key === 'week' && 'Items to buy in the next week:'}
+                      {key === 'month' && 'Items to buy in the next month:'}
+                      {key === 'longer' &&
+                        'Items to buy in the distant future:'}
+                      {key === 'inactive' && "Purchases we can't predict yet:"}
+                    </h3>
+                    <ul>
+                      {value.map((item) => (
+                        <Item
+                          key={item.id}
+                          userToken={props.userToken}
+                          item={item}
+                        />
+                      ))}
+                    </ul>
+                  </>
+                )
+              );
+            })}
           </form>
         </>
       )}

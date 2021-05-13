@@ -84,7 +84,7 @@ function App() {
           </Switch>
           <nav
             style={{
-              position: 'sticky',
+              position: 'fixed',
               bottom: '0',
               width: '100%',
               backgroundColor: '#fff',
