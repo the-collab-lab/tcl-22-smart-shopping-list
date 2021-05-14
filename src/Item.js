@@ -128,7 +128,7 @@ function Item({ userToken, item }) {
         aria-labelledby="simple-modal-title"
       >
         <StyledModalLayout>
-          <h1>
+          <h1 id="simple-modal-title">
             Are you sure you want to delete <span>{itemName}</span> from your
             list?
           </h1>
