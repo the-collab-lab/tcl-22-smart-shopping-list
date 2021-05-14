@@ -146,6 +146,7 @@ function ItemList(props) {
                           key={item.id}
                           userToken={props.userToken}
                           item={item}
+                          status={key}
                         />
                       ))}
                     </ul>
