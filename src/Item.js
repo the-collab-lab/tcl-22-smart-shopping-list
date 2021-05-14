@@ -4,11 +4,14 @@ import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 import { Modal } from '@material-ui/core';
 import StyledModalLayout, { StyledModalBtn } from './StyledModal';
+import { useSnackbar } from 'notistack';
 
 function Item({ userToken, item }) {
   const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
   const [checked, setChecked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
@@ -81,7 +84,14 @@ function Item({ userToken, item }) {
       .doc(id)
       .delete()
       .then(() => {
-        console.log('it worked!');
+        enqueueSnackbar(`${itemName} successfully deleted`, {
+          variant: 'warning',
+        });
+      })
+      .catch(() => {
+        enqueueSnackbar('Oops! Something went wrong.', {
+          variant: 'error',
+        });
       });
   };
 
