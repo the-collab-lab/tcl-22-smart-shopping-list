@@ -125,10 +125,10 @@ function Item({ userToken, item }) {
       <Modal
         open={openModal}
         onClose={handleCloseModal}
-        aria-labelledby="simple-modal-title"
+        aria-labelledby="delete-modal-title"
       >
         <StyledModalLayout>
-          <h1 id="simple-modal-title">
+          <h1 id="delete-modal-title">
             Are you sure you want to delete <span>{itemName}</span> from your
             list?
           </h1>
