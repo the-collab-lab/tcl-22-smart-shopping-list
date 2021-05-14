@@ -19,7 +19,7 @@ function AddItems(props) {
       itemName: groceryItem,
       frequency: itemFreq,
       purchaseDates: [],
-      purchaseEstimates: [],
+      purchaseEstimates: [itemFreq],
     };
 
     const filtered = filter(props.list, groceryItem, true);
