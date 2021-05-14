@@ -112,14 +112,12 @@ function Item({ userToken, item }) {
         X
       </button>
       {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
+      <Modal open={openModal} onClose={handleCloseModal}>
         <StyledModalLayout>
-          <h1>Are you sure you want to delete this item?</h1>
+          <h1>
+            Are you sure you want to delete <span>{itemName}</span> from your
+            list?
+          </h1>
           <StyledModalBtn type="button" onClick={handleCloseModal}>
             Cancel
           </StyledModalBtn>

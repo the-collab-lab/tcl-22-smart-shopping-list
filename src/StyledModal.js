@@ -33,6 +33,10 @@ const StyledModalLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  span {
+    text-decoration: underline;
+  }
 `;
 
 export default StyledModalLayout;
