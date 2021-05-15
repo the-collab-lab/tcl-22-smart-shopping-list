@@ -87,9 +87,7 @@ function Item({ userToken, item, status }) {
           checked={checked}
           onChange={handleClick}
         />
-        {`${itemName} ${
-          !isNaN(daysRemaining) ? '(' + daysRemaining + ' days)' : ''
-        }`}
+        {itemName}
       </label>
     </li>
   );
