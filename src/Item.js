@@ -3,8 +3,14 @@ import { db } from './lib/firebase';
 import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 
-function Item({ userToken, item }) {
-  const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
+function Item({ userToken, item, status }) {
+  const {
+    itemName,
+    id,
+    purchaseDates,
+    purchaseEstimates = [],
+    daysRemaining,
+  } = item;
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -73,7 +79,7 @@ function Item({ userToken, item }) {
 
   return (
     <li>
-      <label htmlFor={itemName}>
+      <label htmlFor={itemName} aria-label={itemName + ' (' + status + ')'}>
         <input
           type="checkbox"
           name={itemName}
