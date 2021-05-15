@@ -5,18 +5,21 @@ import filter from './lib/filter';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 
 function ItemList(props) {
-  const [query, setQuery] = useState('');
-  const [queryObj, setQueryObj] = useState({
+  const emptyObj = {
     week: [],
     month: [],
     longer: [],
     inactive: [],
-  });
+  };
+  const [list, setList] = useState({ emptyObj });
+  const [query, setQuery] = useState('');
+  const [queryObj, setQueryObj] = useState({ emptyObj });
   let history = useHistory();
   const redirect = () => {
     history.push('/additems');
   };
 
+  // When props.list updates, update the local list object
   useEffect(() => {
     const resultsObj = {
       week: [],
@@ -54,10 +57,9 @@ function ItemList(props) {
       }
     });
 
-    // Sort items by next purchase date and then by name, filter for search results
+    // Sort items within each category by next purchase date and then by name
     Object.entries(resultsObj).forEach(([key, value]) => {
-      // [filter-list] 2. Comparison function to filter shopping list and create a search results array
-      const newArray = filter(value, query, false);
+      const newArray = value;
 
       newArray.length > 0 &&
         newArray.sort((a, b) => {
@@ -82,15 +84,34 @@ function ItemList(props) {
       resultsObj[key] = newArray;
     });
 
+    setList(resultsObj);
+
+    // With each list update, reset search results:
     setQueryObj(resultsObj);
-  }, [query, props.list]);
+    setQuery('');
+  }, [props.list]);
 
   const changeHandler = (e) => {
-    setQuery(e.target.value);
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+
+    // When query updates, filter for search results
+    if (newQuery === '') {
+      setQueryObj(list);
+    } else {
+      const resultsObj = {};
+      Object.entries(list).forEach(([key, value]) => {
+        // [filter-list] 2. Comparison function to filter shopping list and create a search results array
+        const newArray = filter(value, newQuery, false);
+        resultsObj[key] = newArray;
+      });
+      setQueryObj(resultsObj);
+    }
   };
 
   const clickHandler = () => {
     setQuery('');
+    setQueryObj(list);
   };
 
   return (
@@ -132,7 +153,7 @@ function ItemList(props) {
             {Object.entries(queryObj).map(([key, value]) => {
               return (
                 value.length > 0 && (
-                  <>
+                  <div key={key}>
                     <h3>
                       {key === 'week' && 'Items to buy in the next week:'}
                       {key === 'month' && 'Items to buy in the next month:'}
@@ -150,7 +171,7 @@ function ItemList(props) {
                         />
                       ))}
                     </ul>
-                  </>
+                  </div>
                 )
               );
             })}
