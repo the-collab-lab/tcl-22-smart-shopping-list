@@ -6,8 +6,16 @@ import { Modal } from '@material-ui/core';
 import StyledModalLayout, { StyledModalBtn } from './StyledModal';
 import { useSnackbar } from 'notistack';
 
-function Item({ userToken, item }) {
-  const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
+
+function Item({ userToken, item, status }) {
+  const {
+    itemName,
+    id,
+    purchaseDates,
+    purchaseEstimates = [],
+    daysRemaining,
+  } = item;
+
   const [checked, setChecked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -15,7 +23,7 @@ function Item({ userToken, item }) {
 
   useEffect(() => {
     // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
-    const timeChecked = 86400;
+    const timeChecked = localStorage.getItem('expirationDuration', 10) || 86400;
     let timeoutID;
 
     if (purchaseDates.length !== 0) {
@@ -107,7 +115,7 @@ function Item({ userToken, item }) {
 
   return (
     <li>
-      <label htmlFor={itemName}>
+      <label htmlFor={itemName} aria-label={itemName + ' (' + status + ')'}>
         <input
           type="checkbox"
           name={itemName}
