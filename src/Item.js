@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { db } from './lib/firebase';
 import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
+import { Modal } from '@material-ui/core';
+import StyledModalLayout, { StyledModalBtn } from './StyledModal';
+import { useSnackbar } from 'notistack';
+
 
 function Item({ userToken, item, status }) {
   const {
@@ -11,7 +15,11 @@ function Item({ userToken, item, status }) {
     purchaseEstimates = [],
     daysRemaining,
   } = item;
+
   const [checked, setChecked] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     // Note that timeChecked value represents seconds (86400 secs in 24 hrs)
@@ -77,6 +85,34 @@ function Item({ userToken, item, status }) {
     setChecked(!checked);
   };
 
+  // [delete-item] 4a. If yes, then remove from firestore database
+  const handleDelete = () => {
+    setOpenModal(true);
+    db.collection(userToken)
+      .doc(id)
+      .delete()
+      .then(() => {
+        enqueueSnackbar(`${itemName} successfully deleted`, {
+          variant: 'warning',
+        });
+      })
+      .catch(() => {
+        enqueueSnackbar('Oops! Something went wrong.', {
+          variant: 'error',
+        });
+      });
+  };
+
+  // [delete-item] 4b. If no, then the modal closes
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  // [delete-item] 3. Create a function that is passed to onClick which will render a mondal which asks the user 'You sure about dat?'
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
   return (
     <li>
       <label htmlFor={itemName} aria-label={itemName + ' (' + status + ')'}>
@@ -89,6 +125,29 @@ function Item({ userToken, item, status }) {
         />
         {itemName}
       </label>
+      {/* // [delete-item] 1. Create a button next to each item in list */}
+      <button type="button" onClick={handleOpenModal}>
+        X
+      </button>
+      {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="delete-modal-title"
+      >
+        <StyledModalLayout>
+          <h1 id="delete-modal-title">
+            Are you sure you want to delete <span>{itemName}</span> from your
+            list?
+          </h1>
+          <StyledModalBtn type="button" onClick={handleCloseModal}>
+            Cancel
+          </StyledModalBtn>
+          <StyledModalBtn type="button" onClick={handleDelete}>
+            Yes
+          </StyledModalBtn>
+        </StyledModalLayout>
+      </Modal>
     </li>
   );
 }
