@@ -123,7 +123,7 @@ function Item({ userToken, item }) {
       {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
       <Modal
         cancelLabel="Cancel"
-        confirmLabel="Confirm"
+        confirmLabel="Yes"
         onClose={handleCloseModal}
         onConfirm={handleDelete}
         open={openModal}
