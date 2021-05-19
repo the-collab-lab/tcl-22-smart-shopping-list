@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
-import { db } from './lib/firebase';
+import { db } from '../../lib/firebase';
 import { useSnackbar } from 'notistack';
-import filter from './lib/filter';
+import filter from '../../lib/filter';
+import {
+  TextField,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+  Button as MuiButton,
+} from '@material-ui/core';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
@@ -46,46 +55,52 @@ function AddItems(props) {
     <div>
       <form id="test-form" onSubmit={submitGroceryItem}>
         <label htmlFor="item">Item name:</label>
-        <input
-          type="text"
+        <TextField
           id="item"
+          variant="outlined"
           value={groceryItem}
           required
           onChange={updateGroceryItem}
         />
-        <fieldset>
-          <input
-            type="radio"
-            id="soon"
-            value={7}
+        <FormControl component="fieldset">
+          <FormLabel component="legend">
+            How soon do you need to buy it?
+          </FormLabel>
+          <RadioGroup
+            aria-label="How soon do you need to buy it?"
             name="frequency"
-            checked={itemFreq === 7}
-            required
+            value={itemFreq}
             onChange={(e) => radioBtnHandler(e)}
-          />
-          <label htmlFor="soon">Soon (in the next 7 days)</label>
-          <input
-            type="radio"
-            id="kindOfSoon"
-            value={14}
-            name="frequency"
-            checked={itemFreq === 14}
             required
-            onChange={(e) => radioBtnHandler(e)}
-          />
-          <label htmlFor="kindOfSoon">Kind of soon (in the next 14 days)</label>
-          <input
-            type="radio"
-            id="notSoon"
-            value={30}
-            name="frequency"
-            checked={itemFreq === 30}
-            required
-            onChange={(e) => radioBtnHandler(e)}
-          />
-          <label htmlFor="notSoon">Not soon (in the next 30 days)</label>
-        </fieldset>
-        <input type="submit" value="Add item" />
+          >
+            <FormControlLabel
+              value={7}
+              control={<Radio />}
+              label="Soon (in the next week)"
+              checked={itemFreq === 7}
+            />
+            <FormControlLabel
+              value={14}
+              control={<Radio />}
+              label="Kind of soon (in the next couple of weeks)"
+              checked={itemFreq === 14}
+            />
+            <FormControlLabel
+              value={30}
+              control={<Radio />}
+              label="Not soon (in the next month)"
+              checked={itemFreq === 30}
+            />
+          </RadioGroup>
+        </FormControl>
+        <MuiButton
+          type="submit"
+          color="primary"
+          disabled={groceryItem.length === 0}
+          variant="contained"
+        >
+          Add item
+        </MuiButton>
       </form>
     </div>
   );
