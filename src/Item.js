@@ -6,15 +6,8 @@ import { Modal } from '@material-ui/core';
 import StyledModalLayout, { StyledModalBtn } from './StyledModal';
 import { useSnackbar } from 'notistack';
 
-
 function Item({ userToken, item, status }) {
-  const {
-    itemName,
-    id,
-    purchaseDates,
-    purchaseEstimates = [],
-    daysRemaining,
-  } = item;
+  const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
 
   const [checked, setChecked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
