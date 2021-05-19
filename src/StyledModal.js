@@ -6,7 +6,7 @@ export const StyledModalBtn = styled.button`
   margin: 0.5rem 1rem;
   width: 6rem;
   background: transparent;
-  color: black;
+  color: var(--primary);
   text-align: center;
   cursor: pointer;
   background: lightgray;
@@ -23,7 +23,7 @@ const StyledModalLayout = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
-  background-color: white;
+  background-color: var(--primary);
   padding: 6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
