@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { db } from './lib/firebase';
-import estimates from './lib/estimates';
 import { differenceInDays, fromUnixTime } from 'date-fns';
-import { Modal } from '@material-ui/core';
-import StyledModalLayout, { StyledModalBtn } from './StyledModal';
 import { useSnackbar } from 'notistack';
-
+import React, { useEffect, useState } from 'react';
+import { Modal } from './components';
+import estimates from './lib/estimates';
+import { db } from './lib/firebase';
 
 function Item({ userToken, item, status }) {
   const {
@@ -131,23 +129,19 @@ function Item({ userToken, item, status }) {
       </button>
       {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
       <Modal
-        open={openModal}
+        cancelLabel="Cancel"
+        confirmLabel="Yes"
         onClose={handleCloseModal}
-        aria-labelledby="delete-modal-title"
-      >
-        <StyledModalLayout>
-          <h1 id="delete-modal-title">
+        onConfirm={handleDelete}
+        open={openModal}
+        title={
+          <>
             Are you sure you want to delete <span>{itemName}</span> from your
             list?
-          </h1>
-          <StyledModalBtn type="button" onClick={handleCloseModal}>
-            Cancel
-          </StyledModalBtn>
-          <StyledModalBtn type="button" onClick={handleDelete}>
-            Yes
-          </StyledModalBtn>
-        </StyledModalLayout>
-      </Modal>
+          </>
+        }
+        titleId="delete-modal-title"
+      />
     </li>
   );
 }
