@@ -12,10 +12,11 @@ const Welcome = (props) => {
     <div>
       <h2>Welcome to your Smart Shopping List!</h2>
       <Button
-        variant="contained"
-        color="primary"
         buttonText="Create a new list"
+        color="primary"
         onClick={() => storeToken()}
+        type="button"
+        variant="contained"
       />
       <hr />
       <ShareToken updateToken={props.updateToken} />

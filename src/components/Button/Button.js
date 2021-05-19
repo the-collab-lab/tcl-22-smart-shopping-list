@@ -1,9 +1,15 @@
 import { Button as MuiButton } from '@material-ui/core';
 import React from 'react';
 
-const Button = ({ onClick, buttonText, variant, color, size }) => {
+const Button = ({ buttonText, color, onClick, size, type, variant }) => {
   return (
-    <MuiButton onClick={onClick} variant={variant} color={color} size={size}>
+    <MuiButton
+      color={color}
+      onClick={onClick}
+      size={size}
+      type={type}
+      variant={variant}
+    >
       {buttonText}
     </MuiButton>
   );
