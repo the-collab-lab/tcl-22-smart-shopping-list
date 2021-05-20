@@ -9,8 +9,9 @@ import {
   FormControlLabel,
   RadioGroup,
   Radio,
-  Button as MuiButton,
+  Button,
 } from '@material-ui/core';
+import { StyledForm } from './elements';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
@@ -53,10 +54,10 @@ function AddItems(props) {
 
   return (
     <div>
-      <form id="test-form" onSubmit={submitGroceryItem}>
-        <label htmlFor="item">Item name:</label>
+      <StyledForm id="add-item-form" onSubmit={submitGroceryItem}>
         <TextField
           id="item"
+          label="Item name:"
           variant="outlined"
           value={groceryItem}
           required
@@ -93,15 +94,15 @@ function AddItems(props) {
             />
           </RadioGroup>
         </FormControl>
-        <MuiButton
+        <Button
           type="submit"
           color="primary"
           disabled={groceryItem.length === 0}
           variant="contained"
         >
           Add item
-        </MuiButton>
-      </form>
+        </Button>
+      </StyledForm>
     </div>
   );
 }
