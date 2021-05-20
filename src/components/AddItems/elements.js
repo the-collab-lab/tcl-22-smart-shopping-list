@@ -10,5 +10,7 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledButton = styled(Button)`
-  background: ${primary.dark};
+  && {
+    background: black;
+  }
 `;
