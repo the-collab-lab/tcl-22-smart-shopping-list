@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GlobalStyle from './globalStyles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -59,9 +60,9 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider theme={GlobalStyle}>
       <SnackbarProvider maxSnack={3}>
-        <GlobalStyle />
+        {/* <GlobalStyle /> */}
         <Router>
           <div className="App">
             <h1>Shopping app</h1>
@@ -125,7 +126,7 @@ function App() {
           </div>
         </Router>
       </SnackbarProvider>
-    </>
+    </ThemeProvider>
   );
 }
 

@@ -10,12 +10,16 @@ import {
   RadioGroup,
   Radio,
   Button,
+  useTheme,
 } from '@material-ui/core';
-import { StyledForm } from './elements';
+import { StyledForm, StyledButton } from './elements';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
   const [itemFreq, setItemFreq] = useState(7);
+  const theme = useTheme();
+  // theme.palette.primary.light
+  console.log(theme.palette.primary.light);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -94,14 +98,14 @@ function AddItems(props) {
             />
           </RadioGroup>
         </FormControl>
-        <Button
+        <StyledButton
           type="submit"
           color="primary"
-          disabled={groceryItem.length === 0}
+          // disabled={groceryItem.length === 0}
           variant="contained"
         >
           Add item
-        </Button>
+        </StyledButton>
       </StyledForm>
     </div>
   );
