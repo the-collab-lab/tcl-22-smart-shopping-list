@@ -11,7 +11,7 @@ import {
 import { db } from './lib/firebase';
 import { SnackbarProvider } from 'notistack';
 
-import { AddItems } from './components/index';
+import { AddItems } from './pages/index';
 import ItemList from './ItemList';
 import Welcome from './Welcome';
 
