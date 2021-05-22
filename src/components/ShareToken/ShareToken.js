@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { db } from './lib/firebase';
+import { Button, TextField } from '@material-ui/core';
+import { db } from './../../lib/firebase';
 import { withSnackbar } from 'notistack';
+import { StyledForm } from './elements';
 
 const ShareToken = (props) => {
   const [shareToken, setShareToken] = useState(null);
@@ -36,11 +38,18 @@ const ShareToken = (props) => {
   return (
     <>
       <p>Join an existing shopping list by entering a three word token.</p>
-      <form id="shareToken" onSubmit={onSubmitHandler}>
+      <StyledForm id="shareToken" onSubmit={onSubmitHandler}>
         <label htmlFor="shareToken">Share token</label>
-        <input type="text" onChange={onChangeHandler} required />
-        <input type="submit" value="Join an existing list" />
-      </form>
+        <TextField variant="outlined" onChange={onChangeHandler} required />
+        <Button
+          color="secondary"
+          size="small"
+          type="submit"
+          variant="contained"
+        >
+          Join an existing list
+        </Button>
+      </StyledForm>
     </>
   );
 };
