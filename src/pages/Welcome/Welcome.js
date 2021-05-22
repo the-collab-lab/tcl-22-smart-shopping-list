@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from './components';
-import getToken from './lib/tokens';
-import ShareToken from './ShareToken';
+import { Button } from '@material-ui/core';
+import getToken from '../../lib/tokens';
+import ShareToken from '../../ShareToken';
 
 const Welcome = (props) => {
   const storeToken = () => {
@@ -12,12 +12,13 @@ const Welcome = (props) => {
     <div>
       <h2>Welcome to your Smart Shopping List!</h2>
       <Button
-        buttonText="Create a new list"
         color="primary"
         onClick={() => storeToken()}
         type="button"
         variant="contained"
-      />
+      >
+        Create a new list
+      </Button>
       <hr />
       <ShareToken updateToken={props.updateToken} />
     </div>

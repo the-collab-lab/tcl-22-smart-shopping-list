@@ -11,9 +11,8 @@ import {
 import { db } from './lib/firebase';
 import { SnackbarProvider } from 'notistack';
 
-import { AddItems } from './pages/index';
+import { AddItems, Welcome } from './pages/index';
 import ItemList from './ItemList';
-import Welcome from './Welcome';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken'));
