@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import getToken from '../../lib/tokens';
-import ShareToken from '../../ShareToken';
+import ShareToken from '../../components/ShareToken';
 
 const Welcome = (props) => {
   const storeToken = () => {
