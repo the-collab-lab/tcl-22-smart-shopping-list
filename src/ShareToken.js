@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField } from './components';
+import { Button, TextField } from '@material-ui/core';
 import { db } from './lib/firebase';
 import { withSnackbar } from 'notistack';
 
@@ -41,12 +41,13 @@ const ShareToken = (props) => {
         <label htmlFor="shareToken">Share token</label>
         <TextField variant="outlined" onChange={onChangeHandler} required />
         <Button
-          buttonText="Join an existing list"
           color="secondary"
           size="small"
           type="submit"
           variant="contained"
-        />
+        >
+          Join an existing list
+        </Button>
       </form>
     </>
   );
