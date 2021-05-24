@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import GlobalStyle from './globalStyles';
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +9,13 @@ import {
 import { db } from './lib/firebase';
 import { SnackbarProvider } from 'notistack';
 
+import {
+  GlobalStyles,
+  primary,
+  accent,
+  neutral,
+  Layout,
+} from './components/index';
 import { AddItems, Welcome } from './pages/index';
 import ItemList from './ItemList';
 
@@ -58,9 +63,9 @@ function App() {
   };
 
   return (
-    <>
-      <SnackbarProvider maxSnack={3}>
-        <GlobalStyle />
+    <SnackbarProvider maxSnack={3}>
+      <Layout>
+        <GlobalStyles />
         <Router>
           <div className="App">
             <h1>Shopping app</h1>
@@ -123,8 +128,8 @@ function App() {
             </nav>
           </div>
         </Router>
-      </SnackbarProvider>
-    </>
+      </Layout>
+    </SnackbarProvider>
   );
 }
 
