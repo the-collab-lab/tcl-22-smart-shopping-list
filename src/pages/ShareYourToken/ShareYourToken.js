@@ -23,7 +23,7 @@ function ShareYourToken(props) {
         <h2>Share your list</h2>
         <p>Copy the token below to share your shopping list with others:</p>
 
-        <ReadOnlyInput value={sharedUserToken} readOnly={true} ref={inputRef} />
+        <ReadOnlyInput value={sharedUserToken} ref={inputRef} readOnly />
         {document.queryCommandSupported('copy') && (
           <Button
             color="primary"
