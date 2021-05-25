@@ -1,24 +1,40 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { StyledForm, ReadOnlyInput } from './elements';
+import { Button } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 
 function ShareYourToken(props) {
   let sharedUserToken = localStorage.getItem('userToken');
+  const { enqueueSnackbar } = useSnackbar();
+
+  const inputRef = useRef(null);
+  function copyData() {
+    navigator.clipboard.writeText(inputRef.current.value);
+    if (navigator.clipboard.writeText) {
+      enqueueSnackbar('Successfully copied!', {
+        variant: 'success',
+      });
+    }
+  }
 
   return (
     <>
-      <h2>Share your list</h2>
-      <p>Copy the token below to share your shopping list with others:</p>
-      <p>{sharedUserToken}</p>
-      <input value={sharedUserToken} readOnly={true} />
-      {document.queryCommandSupported('copy') && (
-        <button
+      <StyledForm>
+        <h2>Share your list</h2>
+        <p>Copy the token below to share your shopping list with others:</p>
 
-        //   props.callback(true);
-        //   setTimeout(() => props.callback(false), 3000);
-        //replace with notistack
-        >
-          COPY
-        </button>
-      )}
+        <ReadOnlyInput value={sharedUserToken} readOnly={true} ref={inputRef} />
+        {document.queryCommandSupported('copy') && (
+          <Button
+            color="primary"
+            onClick={copyData}
+            type="button"
+            variant="contained"
+          >
+            COPY
+          </Button>
+        )}
+      </StyledForm>
     </>
   );
 }
