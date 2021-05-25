@@ -34,15 +34,17 @@ function App() {
               // Restructure data from array to an array of objects,
               // with each object containing name, id and date of the last purchase
               snapshot.forEach((doc) => {
-                const obj = {
-                  id: doc.id,
-                  itemName: doc.data()['formData']['itemName'],
-                  purchaseDates: doc.data()['formData']['purchaseDates'],
-                  purchaseEstimates: doc.data()['formData'][
-                    'purchaseEstimates'
-                  ],
-                };
-                newList.push(obj);
+                if (doc.id !== 'ListData') {
+                  const obj = {
+                    id: doc.id,
+                    itemName: doc.data()['formData']['itemName'],
+                    purchaseDates: doc.data()['formData']['purchaseDates'],
+                    purchaseEstimates: doc.data()['formData'][
+                      'purchaseEstimates'
+                    ],
+                  };
+                  newList.push(obj);
+                }
               });
               setList(newList);
               setError(null);
