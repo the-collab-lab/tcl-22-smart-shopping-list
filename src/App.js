@@ -71,7 +71,7 @@ function App() {
             <h1>Shopping app</h1>
             <Switch>
               {!token && (
-                <Route path={['/list', '/additems']}>
+                <Route path={['/list', '/additems', '/shareyourtoken']}>
                   <Redirect to="/" />
                 </Route>
               )}
