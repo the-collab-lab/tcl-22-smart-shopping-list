@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useRedirect from '../../useRedirect';
 import { db } from '../../lib/firebase';
 import { useSnackbar } from 'notistack';
 import filter from '../../lib/filter';
@@ -14,6 +15,8 @@ import {
 import { StyledForm } from './elements';
 
 function AddItems(props) {
+  useRedirect(props.userToken);
+
   const [groceryItem, setGroceryItem] = useState('');
   const [itemFreq, setItemFreq] = useState(7);
 
