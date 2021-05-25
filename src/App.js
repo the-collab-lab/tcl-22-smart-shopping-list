@@ -70,6 +70,11 @@ function App() {
           <div className="App">
             <h1>Shopping app</h1>
             <Switch>
+              {!token && (
+                <Route path={['/list', '/additems']}>
+                  <Redirect to="/" />
+                </Route>
+              )}
               <Route path="/list">
                 <ItemList
                   list={list}
