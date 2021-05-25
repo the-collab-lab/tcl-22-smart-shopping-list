@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import useRedirect from './useRedirect';
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
 import filter from './lib/filter';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 
 function ItemList(props) {
-  useRedirect(props.userToken);
-
   const emptyObj = {
     week: [],
     month: [],
