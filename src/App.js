@@ -16,7 +16,7 @@ import {
   neutral,
   Layout,
 } from './components/index';
-import { AddItems, Welcome } from './pages/index';
+import { AddItems, Welcome, ShareYourToken } from './pages/index';
 import ItemList from './ItemList';
 
 function App() {
@@ -78,6 +78,11 @@ function App() {
                   userToken={token}
                 />
               </Route>
+
+              <Route path="/shareyourtoken">
+                <ShareYourToken />
+              </Route>
+
               <Route path="/additems">
                 <AddItems list={list} userToken={token} />
               </Route>
@@ -112,6 +117,16 @@ function App() {
                     }}
                   >
                     Grocery List
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/shareyourtoken"
+                    activeStyle={{
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Share Your Token
                   </NavLink>
                 </li>
                 <li>
