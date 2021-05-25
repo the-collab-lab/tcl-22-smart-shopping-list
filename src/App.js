@@ -70,25 +70,22 @@ function App() {
           <div className="App">
             <h1>Shopping app</h1>
             <Switch>
-              {!token ? (
+              {!token && (
                 <Route path={['/list', '/additems']}>
                   <Redirect to="/" />
                 </Route>
-              ) : (
-                <>
-                  <Route path="/list">
-                    <ItemList
-                      list={list}
-                      loading={loading}
-                      error={error}
-                      userToken={token}
-                    />
-                  </Route>
-                  <Route path="/additems">
-                    <AddItems list={list} userToken={token} />
-                  </Route>
-                </>
               )}
+              <Route path="/list">
+                <ItemList
+                  list={list}
+                  loading={loading}
+                  error={error}
+                  userToken={token}
+                />
+              </Route>
+              <Route path="/additems">
+                <AddItems list={list} userToken={token} />
+              </Route>
               <Route exact path="/">
                 {token ? (
                   <Redirect to="/list" />
