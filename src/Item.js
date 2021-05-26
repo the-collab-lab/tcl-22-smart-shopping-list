@@ -57,7 +57,6 @@ function Item({ userToken, item, status }) {
       const newDate = new Date();
       const newDates = [...purchaseDates, newDate];
       const numberOfPurchases = newDates.length;
-      // let latestInterval;
 
       const lastDate =
         numberOfPurchases >= 2
