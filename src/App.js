@@ -9,13 +9,7 @@ import {
 import { db } from './lib/firebase';
 import { SnackbarProvider } from 'notistack';
 
-import {
-  GlobalStyles,
-  primary,
-  accent,
-  neutral,
-  Layout,
-} from './components/index';
+import { GlobalStyles, Layout } from './components/index';
 import { AddItems, Welcome, ShareYourToken } from './pages/index';
 import ItemList from './ItemList';
 
@@ -38,9 +32,8 @@ function App() {
                   id: doc.id,
                   itemName: doc.data()['formData']['itemName'],
                   purchaseDates: doc.data()['formData']['purchaseDates'],
-                  purchaseEstimates: doc.data()['formData'][
-                    'purchaseEstimates'
-                  ],
+                  purchaseEstimates:
+                    doc.data()['formData']['purchaseEstimates'],
                 };
                 newList.push(obj);
               });
@@ -63,88 +56,88 @@ function App() {
   };
 
   return (
-    <SnackbarProvider maxSnack={3}>
-      <Layout>
-        <GlobalStyles />
-        <Router>
-          <div className="App">
-            <h1>Shopping app</h1>
-            <Switch>
-              <Route path="/list">
-                <ItemList
-                  list={list}
-                  loading={loading}
-                  error={error}
-                  userToken={token}
-                />
-              </Route>
-
-              <Route path="/shareyourtoken">
-                <ShareYourToken />
-              </Route>
-
-              <Route path="/additems">
-                <AddItems list={list} userToken={token} />
-              </Route>
-              <Route exact path="/">
-                {token ? (
-                  <Redirect to="/list" />
-                ) : (
-                  <Welcome updateToken={updateToken} />
-                )}
-              </Route>
-            </Switch>
-            <nav
-              style={{
-                position: 'fixed',
-                bottom: '0',
-                width: '100%',
-                backgroundColor: '#fff',
-              }}
-            >
-              <ul
+    <>
+      <SnackbarProvider maxSnack={3}>
+        <Layout>
+          <GlobalStyles />
+          <Router>
+            <div className="App">
+              <h1>Shopping app</h1>
+              <Switch>
+                <Route path="/list">
+                  <ItemList
+                    list={list}
+                    loading={loading}
+                    error={error}
+                    userToken={token}
+                  />
+                </Route>
+                <Route path="/shareyourtoken">
+                  <ShareYourToken />
+                </Route>
+                <Route path="/additems">
+                  <AddItems list={list} userToken={token} />
+                </Route>
+                <Route exact path="/">
+                  {token ? (
+                    <Redirect to="/list" />
+                  ) : (
+                    <Welcome updateToken={updateToken} />
+                  )}
+                </Route>
+              </Switch>
+              <nav
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-evenly',
-                  paddingLeft: '0',
+                  position: 'fixed',
+                  bottom: '0',
+                  width: '100%',
+                  backgroundColor: '#fff',
                 }}
               >
-                <li>
-                  <NavLink
-                    to="/list"
-                    activeStyle={{
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Grocery List
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/shareyourtoken"
-                    activeStyle={{
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Share Your Token
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/additems"
-                    activeStyle={{
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Add Groceries
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </Router>
-      </Layout>
-    </SnackbarProvider>
+                <ul
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-evenly',
+                    paddingLeft: '0',
+                  }}
+                >
+                  <li>
+                    <NavLink
+                      to="/list"
+                      activeStyle={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Grocery List
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/shareyourtoken"
+                      activeStyle={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Share Your Token
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/additems"
+                      activeStyle={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Add Groceries
+                    </NavLink>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </Router>
+        </Layout>
+      </SnackbarProvider>
+    </>
   );
 }
 
