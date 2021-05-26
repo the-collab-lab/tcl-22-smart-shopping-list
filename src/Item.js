@@ -59,7 +59,6 @@ function Item({ userToken, item, status }) {
       const numberOfPurchases = newDates.length;
       // let latestInterval;
 
-      // if (numberOfPurchases >= 2) {
       const lastDate =
         numberOfPurchases >= 2
           ? fromUnixTime(purchaseDates[purchaseDates.length - 1].seconds)
@@ -71,7 +70,7 @@ function Item({ userToken, item, status }) {
       if (purchaseEstimates.length > 0) {
         lastEstimate = purchaseEstimates[purchaseEstimates.length - 1];
       }
-      // }
+
       const newInterval = estimates(
         lastEstimate,
         latestInterval,
