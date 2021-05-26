@@ -6,7 +6,13 @@ import estimates from './lib/estimates';
 import { db } from './lib/firebase';
 
 function Item({ userToken, item, status }) {
-  const { itemName, id, purchaseDates, purchaseEstimates = [] } = item;
+  const {
+    itemName,
+    id,
+    dateAdded,
+    purchaseDates,
+    purchaseEstimates = [],
+  } = item;
 
   const [checked, setChecked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -34,13 +40,14 @@ function Item({ userToken, item, status }) {
     }
 
     return () => clearTimeout(timeoutID);
-  }, [purchaseDates]);
+  }, [purchaseDates, dateAdded]);
 
   const handleClick = () => {
     if (checked) {
       // Remove the latest purchase date and estimate from the database:
       purchaseDates.pop();
-      purchaseEstimates.length > 0 && purchaseEstimates.pop();
+      // Don't remove the first estimate that comes from user input:
+      purchaseEstimates.length > 1 && purchaseEstimates.pop();
       db.collection(userToken).doc(id).update({
         'formData.purchaseDates': purchaseDates,
         'formData.purchaseEstimates': purchaseEstimates,
@@ -50,24 +57,27 @@ function Item({ userToken, item, status }) {
       const newDate = new Date();
       const newDates = [...purchaseDates, newDate];
       const numberOfPurchases = newDates.length;
+      // let latestInterval;
+
+      // if (numberOfPurchases >= 2) {
+      const lastDate =
+        numberOfPurchases >= 2
+          ? fromUnixTime(purchaseDates[purchaseDates.length - 1].seconds)
+          : fromUnixTime(dateAdded?.seconds);
+
+      const latestInterval = differenceInDays(newDate, lastDate);
+
       let lastEstimate;
-      let latestInterval;
-
-      if (numberOfPurchases >= 2) {
-        const lastDate = fromUnixTime(
-          purchaseDates[purchaseDates.length - 1].seconds,
-        );
-        latestInterval = differenceInDays(newDate, lastDate);
-
-        if (purchaseEstimates.length > 0) {
-          lastEstimate = purchaseEstimates[purchaseEstimates.length - 1];
-        }
+      if (purchaseEstimates.length > 0) {
+        lastEstimate = purchaseEstimates[purchaseEstimates.length - 1];
       }
+      // }
       const newInterval = estimates(
         lastEstimate,
         latestInterval,
         numberOfPurchases,
       );
+
       newInterval && purchaseEstimates.push(newInterval);
       db.collection(userToken).doc(id).update({
         'formData.purchaseDates': newDates,
