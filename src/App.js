@@ -56,7 +56,6 @@ function App() {
   };
 
   return (
-    <>
       <SnackbarProvider maxSnack={3}>
         <Layout>
           <GlobalStyles />
@@ -137,7 +136,6 @@ function App() {
           </Router>
         </Layout>
       </SnackbarProvider>
-    </>
   );
 }
 
