@@ -4,7 +4,7 @@ import BackgroundIcons from '../../backgroundIcons.svg';
 
 const StyledMain = styled.main`
   background-image: url(${BackgroundIcons});
-  min-height: 100vh;
+  min-height: 100%;
 
   .wrapper {
     max-width: 1170px;
