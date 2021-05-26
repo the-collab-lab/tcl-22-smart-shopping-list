@@ -70,6 +70,11 @@ function App() {
           <div className="App">
             <h1>Shopping app</h1>
             <Switch>
+              {!token && (
+                <Route path={['/list', '/additems', '/shareyourtoken']}>
+                  <Redirect to="/" />
+                </Route>
+              )}
               <Route path="/list">
                 <ItemList
                   list={list}
@@ -94,53 +99,55 @@ function App() {
                 )}
               </Route>
             </Switch>
-            <nav
-              style={{
-                position: 'fixed',
-                bottom: '0',
-                width: '100%',
-                backgroundColor: '#fff',
-              }}
-            >
-              <ul
+            {token && (
+              <nav
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-evenly',
-                  paddingLeft: '0',
+                  position: 'fixed',
+                  bottom: '0',
+                  width: '100%',
+                  backgroundColor: '#fff',
                 }}
               >
-                <li>
-                  <NavLink
-                    to="/list"
-                    activeStyle={{
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Grocery List
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/shareyourtoken"
-                    activeStyle={{
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Share Your Token
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/additems"
-                    activeStyle={{
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Add Groceries
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
+                <ul
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-evenly',
+                    paddingLeft: '0',
+                  }}
+                >
+                  <li>
+                    <NavLink
+                      to="/list"
+                      activeStyle={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Grocery List
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/shareyourtoken"
+                      activeStyle={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Share Your Token
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/additems"
+                      activeStyle={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Add Groceries
+                    </NavLink>
+                  </li>
+                </ul>
+              </nav>
+            )}
           </div>
         </Router>
       </Layout>
