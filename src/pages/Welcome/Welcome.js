@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
+import { primary, neutral, accent } from './../../components/index';
 import getToken from '../../lib/tokens';
 import ShareToken from '../../components/ShareToken';
 
@@ -9,19 +10,19 @@ const Welcome = (props) => {
     props.updateToken(token);
   };
   return (
-    <div>
+    <>
       <h2>Welcome to your Smart Shopping List!</h2>
       <Button
-        color="primary"
+        style={{ color: primary.main, backgroundColor: 'white' }}
         onClick={() => storeToken()}
         type="button"
         variant="contained"
       >
-        Create a new list
+        Create new list
       </Button>
       <hr />
       <ShareToken updateToken={props.updateToken} />
-    </div>
+    </>
   );
 };
 
