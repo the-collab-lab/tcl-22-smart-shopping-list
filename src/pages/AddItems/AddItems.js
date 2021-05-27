@@ -27,7 +27,7 @@ function AddItems(props) {
     event.preventDefault();
     const formData = {
       itemName: groceryItem,
-      frequency: itemFreq,
+      dateAdded: new Date(),
       purchaseDates: [],
       purchaseEstimates: [itemFreq],
     };

@@ -4,6 +4,11 @@ const GlobalStyle = createGlobalStyle`
   li {
     list-style: none;
   }
+  html, 
+  body, 
+  #root {
+    height: 100%;
+  }
 `;
 
 export default GlobalStyle;

@@ -9,14 +9,8 @@ import {
 import { db } from './lib/firebase';
 import { SnackbarProvider } from 'notistack';
 
-import {
-  GlobalStyles,
-  primary,
-  accent,
-  neutral,
-  Layout,
-} from './components/index';
-import { AddItems, Welcome } from './pages/index';
+import { GlobalStyles, Layout } from './components/index';
+import { AddItems, Welcome, ShareYourToken } from './pages/index';
 import ItemList from './ItemList';
 
 function App() {
@@ -39,9 +33,9 @@ function App() {
                     id: doc.id,
                     itemName: doc.data()['formData']['itemName'],
                     purchaseDates: doc.data()['formData']['purchaseDates'],
-                    purchaseEstimates: doc.data()['formData'][
-                      'purchaseEstimates'
-                    ],
+                    purchaseEstimates:
+                      doc.data()['formData']['purchaseEstimates'],
+                    dateAdded: doc.data()['formData']['dateAdded'],
                   };
                   newList.push(obj);
                 }
@@ -80,6 +74,9 @@ function App() {
                   userToken={token}
                 />
               </Route>
+              <Route path="/shareyourtoken">
+                <ShareYourToken />
+              </Route>
               <Route path="/additems">
                 <AddItems list={list} userToken={token} />
               </Route>
@@ -114,6 +111,16 @@ function App() {
                     }}
                   >
                     Grocery List
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/shareyourtoken"
+                    activeStyle={{
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Share Your Token
                   </NavLink>
                 </li>
                 <li>

@@ -30,22 +30,26 @@ function ItemList(props) {
 
     // Separate list items into categories based on how soon they should be bought
     props.list.forEach((item) => {
-      if (
-        item.purchaseDates.length < 1 ||
-        !(item.purchaseEstimates?.length > 0)
-      ) {
+      if (!(item.purchaseEstimates?.length > 0)) {
         resultsObj['inactive'].push(item);
       } else {
-        const lastPurchase = fromUnixTime(
-          item.purchaseDates[item.purchaseDates.length - 1].seconds,
-        );
+        // If the item hasn't been bought yet,
+        // calculate lastInterval based on the date when it was added to the list
+        // and how soon the user wanted to buy it:
+        const lastPurchase =
+          item.purchaseDates.length > 0
+            ? fromUnixTime(
+                item.purchaseDates[item.purchaseDates.length - 1].seconds,
+              )
+            : fromUnixTime(item.dateAdded?.seconds);
+
         const lastInterval = differenceInDays(Date.now(), lastPurchase);
         const lastEstimate =
           item.purchaseEstimates[item.purchaseEstimates.length - 1];
         const daysRemaining = lastEstimate - lastInterval;
         item.daysRemaining = daysRemaining;
 
-        if (lastInterval >= 2 * lastEstimate) {
+        if (lastInterval >= 2 * lastEstimate || isNaN(lastInterval)) {
           resultsObj['inactive'].push(item);
         } else if (daysRemaining <= 7) {
           resultsObj['week'].push(item);
