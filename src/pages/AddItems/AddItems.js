@@ -3,15 +3,18 @@ import { db } from '../../lib/firebase';
 import { useSnackbar } from 'notistack';
 import filter from '../../lib/filter';
 import {
+  Typography,
   TextField,
   FormControl,
   FormLabel,
   FormControlLabel,
   RadioGroup,
   Radio,
-  Button,
+  Fab,
 } from '@material-ui/core';
-import { StyledForm } from './elements';
+import { Add } from '@material-ui/icons';
+
+import { StyledForm, StyledWrapper } from './elements';
 
 function AddItems(props) {
   const [groceryItem, setGroceryItem] = useState('');
@@ -54,54 +57,61 @@ function AddItems(props) {
 
   return (
     <div>
+      <Typography variant="h1">Add a New Item</Typography>
       <StyledForm id="add-item-form" onSubmit={submitGroceryItem}>
-        <TextField
-          id="item"
-          label="Item name:"
-          variant="outlined"
-          value={groceryItem}
-          required
-          onChange={updateGroceryItem}
-        />
-        <FormControl component="fieldset">
-          <FormLabel component="legend">
-            How soon do you need to buy it?
-          </FormLabel>
-          <RadioGroup
-            aria-label="How soon do you need to buy it?"
-            name="frequency"
-            value={itemFreq}
-            onChange={(e) => radioBtnHandler(e)}
+        <StyledWrapper>
+          <TextField
+            id="item"
+            label="Item name:"
+            variant="outlined"
+            value={groceryItem}
             required
-          >
-            <FormControlLabel
-              value={7}
-              control={<Radio />}
-              label="Soon (in the next week)"
-              checked={itemFreq === 7}
-            />
-            <FormControlLabel
-              value={14}
-              control={<Radio />}
-              label="Kind of soon (in the next couple of weeks)"
-              checked={itemFreq === 14}
-            />
-            <FormControlLabel
-              value={30}
-              control={<Radio />}
-              label="Not soon (in the next month)"
-              checked={itemFreq === 30}
-            />
-          </RadioGroup>
+            onChange={updateGroceryItem}
+          />
+        </StyledWrapper>
+        <FormControl component="fieldset">
+          <StyledWrapper>
+            <FormLabel component="legend">
+              How soon do you need to buy it?
+            </FormLabel>
+          </StyledWrapper>
+          <StyledWrapper>
+            <RadioGroup
+              aria-label="How soon do you need to buy it?"
+              name="frequency"
+              value={itemFreq}
+              onChange={(e) => radioBtnHandler(e)}
+              required
+            >
+              <FormControlLabel
+                value={7}
+                control={<Radio />}
+                label="Soon (in the next week)"
+                checked={itemFreq === 7}
+              />
+              <FormControlLabel
+                value={14}
+                control={<Radio />}
+                label="Kind of soon (in the next couple of weeks)"
+                checked={itemFreq === 14}
+              />
+              <FormControlLabel
+                value={30}
+                control={<Radio />}
+                label="Not soon (in the next month)"
+                checked={itemFreq === 30}
+              />
+            </RadioGroup>
+          </StyledWrapper>
         </FormControl>
-        <Button
+        <Fab
           type="submit"
-          color="primary"
           disabled={groceryItem.length === 0}
-          variant="contained"
+          color="secondary"
+          aria-label="add"
         >
-          Add item
-        </Button>
+          <Add />
+        </Fab>
       </StyledForm>
     </div>
   );
