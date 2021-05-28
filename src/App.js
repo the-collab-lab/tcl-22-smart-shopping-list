@@ -9,12 +9,26 @@ import {
 import { db } from './lib/firebase';
 
 import { GlobalStyles, Layout, theme } from './components/index';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider, makeStyles } from '@material-ui/styles';
 
 import { AddItems, Welcome, ShareYourToken } from './pages/index';
 import ItemList from './ItemList';
 import { SnackbarProvider } from 'notistack';
 
+const useStyles = makeStyles(({ palette }) => ({
+  // default variant
+  contentRoot: {
+    backgroundColor: 'aqua',
+  },
+  variantSuccess: {
+    backgroundColor: 'blue',
+  },
+}));
+
+export const NotistackProvider = ({ children }) => {
+  const classes = useStyles();
+  return <SnackbarProvider classes={classes} children={children} />;
+};
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken'));
   const [list, setList] = useState([]);
@@ -62,7 +76,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SnackbarProvider
+      <NotistackProvider
         maxSnack={3}
         anchorOrigin={{
           vertical: 'bottom',
@@ -153,7 +167,7 @@ function App() {
             </div>
           </Router>
         </Layout>
-      </SnackbarProvider>
+      </NotistackProvider>
     </ThemeProvider>
   );
 }
