@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { db } from './../../lib/firebase';
 import { withSnackbar } from 'notistack';
-import { StyledForm } from './elements';
+import { StyledForm, StyledTextField } from './elements';
+import { primary } from './../../components';
+import './styles.css';
 
 const ShareToken = (props) => {
   const [shareToken, setShareToken] = useState(null);
@@ -37,17 +39,27 @@ const ShareToken = (props) => {
 
   return (
     <>
-      <p>Join an existing shopping list by entering a three word token.</p>
+      <h2>Welcome to your smart shopping list!</h2>
+      <p>Join an existing shopping list by entering a three word token:</p>
       <StyledForm id="shareToken" onSubmit={onSubmitHandler}>
-        <label htmlFor="shareToken">Share token</label>
-        <TextField variant="outlined" onChange={onChangeHandler} required />
+        <label htmlFor="shareToken" class="visuallyHidden">
+          Share token
+        </label>
+        <StyledTextField
+          id="shareToken"
+          variant="outlined"
+          onChange={onChangeHandler}
+          label="Token"
+          required
+        />
+        {/* <TextField id="shareToken" variant="outlined" onChange={onChangeHandler} label="Token" required /> */}
         <Button
-          color="secondary"
+          style={{ color: primary.dark, backgroundColor: 'white' }}
           size="small"
           type="submit"
           variant="contained"
         >
-          Join an existing list
+          Join existing list
         </Button>
       </StyledForm>
     </>
