@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import getToken from '../../lib/tokens';
 import { db } from '../../lib/firebase';
 
-const JoinList = (props) => {
+const CreateOrJoin = (props) => {
   const storeToken = () => {
     const token = getToken();
     props.updateToken(token);
@@ -25,4 +25,4 @@ const JoinList = (props) => {
   );
 };
 
-export default JoinList;
+export default CreateOrJoin;
