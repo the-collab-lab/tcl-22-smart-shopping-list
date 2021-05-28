@@ -54,6 +54,12 @@ const tabStyles = makeStyles({
         color: 'white',
       },
     },
+    '&:focus': {
+      backgroundColor: '#A6CF93',
+      '& svg': {
+        color: 'white',
+      },
+    },
   },
 });
 
