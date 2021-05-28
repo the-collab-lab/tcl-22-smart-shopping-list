@@ -1,4 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+import { createMuiTheme } from '@material-ui/core/styles';
+
+// --- STYLED_COMPONENTS ---
 
 const GlobalStyle = createGlobalStyle`
   li {
@@ -8,6 +11,21 @@ const GlobalStyle = createGlobalStyle`
   body, 
   #root {
     height: 100%;
+  }
+  body{
+    margin: 0;
+  }
+  .App {
+    flex: 0 0 50vh;
+    width: 100%;
+    margin: 4.5em;
+    padding: 3.5em;
+    background-color: #FAFAF9;
+    border-radius: 12px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
+                0px 4px 8px rgba(0, 0, 0, 0.08),
+                0px 1px 12px rgba(0, 0, 0, 0.04); 
+    text-align: center; 
   }
 `;
 
@@ -32,8 +50,63 @@ export const accent = {
 };
 
 export const neutral = {
-  main: '#8D8E8D',
-  light: '#F2F3F2',
-  extraLight: '#FAFAF9',
-  dark: '#161A14',
+  main: '#8D8E8D', // dark-grey
+  light: '#F2F3F2', // light-grey
+  extraLight: '#FAFAF9', // white
+  dark: '#161A14', // black
 };
+
+// --- MATERIAL UI ---
+
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: primary.light,
+      main: primary.main,
+      dark: primary.dark,
+      contrastText: neutral.extraLight,
+    },
+    secondary: {
+      light: accent.light,
+      main: accent.main,
+      dark: accent.dark,
+      contrastText: neutral.extraLight,
+    },
+    // Use primary colour for Success in Notistack to unify the shades of green:
+    success: {
+      light: primary.light,
+      main: primary.main,
+      dark: primary.dark,
+      contrastText: neutral.extraLight,
+    },
+    background: {
+      default: neutral.light,
+      paper: neutral.extraLight,
+    },
+    text: {
+      primary: neutral.dark,
+      secondary: neutral.main,
+    },
+  },
+  typography: {
+    htmlFontSize: 18,
+    fontFamily: [pFont, backupFont].join(','),
+    h1: {
+      fontFamily: '"Maven Pro", sans-serif',
+      fontSize: 35.16,
+      fontWeight: 500,
+    },
+    h2: {
+      fontFamily: '"Maven Pro", sans-serif',
+      fontSize: 22.5,
+      fontWeight: 700,
+      lineHeight: 1.3,
+    },
+    h3: {
+      fontFamily: '"Maven Pro", sans-serif',
+      fontSize: 22.5,
+      fontWeight: 500,
+      lineHeight: 1.3,
+    },
+  },
+});
