@@ -14,7 +14,7 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
   width: 100%;
   max-width: 1170px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
