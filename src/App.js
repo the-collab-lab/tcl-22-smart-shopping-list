@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-  Redirect,
-} from 'react-router-dom';
 import { db } from './lib/firebase';
 import { SnackbarProvider } from 'notistack';
 
-import { GlobalStyles, Layout } from './components/index';
-import { AddItems, Welcome, ShareYourToken } from './pages/index';
-import ItemList from './ItemList';
+import { GlobalStyles, Layout, RouterComponent } from './components/index';
 
-function App() {
+function App(props) {
   const [token, setToken] = useState(localStorage.getItem('userToken'));
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,86 +47,23 @@ function App() {
   };
 
   return (
-      <SnackbarProvider maxSnack={3}>
-        <Layout>
-          <GlobalStyles />
-          <Router>
-            <div className="App">
-              <h1>Shopping app</h1>
-              <Switch>
-                <Route path="/list">
-                  <ItemList
-                    list={list}
-                    loading={loading}
-                    error={error}
-                    userToken={token}
-                  />
-                </Route>
-                <Route path="/shareyourtoken">
-                  <ShareYourToken />
-                </Route>
-                <Route path="/additems">
-                  <AddItems list={list} userToken={token} />
-                </Route>
-                <Route exact path="/">
-                  {token ? (
-                    <Redirect to="/list" />
-                  ) : (
-                    <Welcome updateToken={updateToken} />
-                  )}
-                </Route>
-              </Switch>
-              <nav
-                style={{
-                  position: 'fixed',
-                  bottom: '0',
-                  width: '100%',
-                  backgroundColor: '#fff',
-                }}
-              >
-                <ul
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-evenly',
-                    paddingLeft: '0',
-                  }}
-                >
-                  <li>
-                    <NavLink
-                      to="/list"
-                      activeStyle={{
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Grocery List
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/shareyourtoken"
-                      activeStyle={{
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Share Your Token
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/additems"
-                      activeStyle={{
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Add Groceries
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </Router>
-        </Layout>
-      </SnackbarProvider>
+    <SnackbarProvider maxSnack={3}>
+      <Layout>
+        <GlobalStyles />
+        <div className="App">
+          <h1>Shopping app</h1>
+          <RouterComponent
+            {...props}
+            token={token}
+            list={list}
+            loading={loading}
+            error={error}
+            userToken={token}
+            updateToken={updateToken}
+          />
+        </div>
+      </Layout>
+    </SnackbarProvider>
   );
 }
 

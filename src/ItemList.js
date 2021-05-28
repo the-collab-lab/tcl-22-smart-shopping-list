@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Item from './Item';
-import { useHistory } from 'react-router-dom';
 import filter from './lib/filter';
 import { differenceInDays, fromUnixTime } from 'date-fns';
 
@@ -14,9 +13,10 @@ function ItemList(props) {
   const [list, setList] = useState({ emptyObj });
   const [query, setQuery] = useState('');
   const [queryObj, setQueryObj] = useState({ emptyObj });
-  let history = useHistory();
+
+  // let history = useHistory();
   const redirect = () => {
-    history.push('/additems');
+    props.history.push('/additems');
   };
 
   // When props.list updates, update the local list object
