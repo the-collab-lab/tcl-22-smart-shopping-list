@@ -1,35 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-// --- STYLED_COMPONENTS ---
-
-const GlobalStyle = createGlobalStyle`
-  li {
-    list-style: none;
-  }
-  html, 
-  body, 
-  #root {
-    height: 100%;
-  }
-  body{
-    margin: 0;
-  }
-  .App {
-    flex: 0 0 50vh;
-    width: 100%;
-    margin: 4.5em;
-    padding: 3.5em;
-    background-color: ${theme.palette.background.paper};
-    border-radius: 12px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
-                0px 4px 8px rgba(0, 0, 0, 0.08),
-                0px 1px 12px rgba(0, 0, 0, 0.04); 
-    text-align: center; 
-  }
-`;
-
-export default GlobalStyle;
+// --- THEME FONTS AND COLORS ---
 
 export const hFont = 'Maven Pro';
 
@@ -110,3 +82,33 @@ export const theme = createMuiTheme({
     },
   },
 });
+
+// --- STYLED_COMPONENTS ---
+
+const GlobalStyle = createGlobalStyle`
+  li {
+    list-style: none;
+  }
+  html, 
+  body, 
+  #root {
+    height: 100%;
+  }
+  body{
+    margin: 0;
+  }
+  .App {
+    flex: 0 0 50vh;
+    width: 100%;
+    margin: 4.5em;
+    padding: 3.5em;
+    background-color: ${theme.palette.background.paper};
+    border-radius: 12px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
+                0px 4px 8px rgba(0, 0, 0, 0.08),
+                0px 1px 12px rgba(0, 0, 0, 0.04); 
+    text-align: center; 
+  }
+`;
+
+export default GlobalStyle;
