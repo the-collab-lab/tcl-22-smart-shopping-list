@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
-import getToken from '../../lib/tokens';
-import { db } from '../../lib/firebase';
 import CreateOrJoin from '../../components/CreateOrJoin';
 import ShareToken from '../../components/ShareToken';
 
