@@ -5,7 +5,7 @@ import logo from '../../logo.svg';
 
 const StyledMain = styled.main`
   background-image: url(${BackgroundIcons});
-  min-height: 100vh;
+  min-height: 100%;
 `;
 
 const StyledHeader = styled.header`
@@ -22,7 +22,7 @@ const StyledHeader = styled.header`
 
 const StyledDiv = styled.div`
   max-width: 1170px;
-  min-height: calc(100vh-21px);
+  /* min-height: calc(100vh-21px); */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
