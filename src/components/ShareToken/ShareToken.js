@@ -40,7 +40,6 @@ const ShareToken = (props) => {
       <h2>Welcome to your smart shopping list!</h2>
       <p>Join an existing shopping list by entering a three word token:</p>
       <StyledForm id="shareToken" onSubmit={onSubmitHandler}>
-        <label htmlFor="shareToken">Share token</label>
         <TextField
           id="shareToken"
           variant="outlined"
