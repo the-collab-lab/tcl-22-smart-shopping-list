@@ -12,14 +12,18 @@ const Welcome = (props) => {
   };
   return (
     <div>
-      <h2>Welcome to your Smart Shopping List!</h2>
+      <h2>Welcome to your smart shopping list!</h2>
       <Button
         color="primary"
         onClick={() => storeToken()}
         type="button"
-        variant="contained"
+        variant="outlined"
       >
-        Create a new list
+        Create new list
+      </Button>
+      <br />
+      <Button color="primary" type="button" variant="contained">
+        Join existing list
       </Button>
       <hr />
       <ShareToken updateToken={props.updateToken} />
