@@ -84,6 +84,13 @@ export const theme = createMuiTheme({
       fontFamily: '"Lato", sans-serif',
     },
   },
+  overrides: {
+    MuiTabs: {
+      indicator: {
+        backgroundColor: neutral.extraLight,
+      },
+    },
+  },
 });
 
 // --- STYLED_COMPONENTS ---
@@ -110,6 +117,11 @@ const GlobalStyle = createGlobalStyle`
                 0px 4px 8px rgba(0, 0, 0, 0.08),
                 0px 1px 12px rgba(0, 0, 0, 0.04); 
     text-align: center; 
+  }
+  @media (max-width: 500px) {
+    .App {
+      padding: 3.5em 1rem;
+    }
   }
 `;
 

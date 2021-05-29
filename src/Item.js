@@ -5,13 +5,17 @@ import { Modal } from './components';
 import estimates from './lib/estimates';
 import { db } from './lib/firebase';
 import styled from 'styled-components';
-import { Checkbox, Typography } from '@material-ui/core';
+import { Checkbox } from '@material-ui/core';
 import { FaTrashAlt } from 'react-icons/fa';
+import { neutral } from './components/index';
 
 const ItemStyle = styled.ul`
   text-align: left;
-  background-color: lightgray;
+  background: #f2f3f2;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08),
+    0px 1px 12px rgba(0, 0, 0, 0.04);
   color: black;
+  padding: 0.75rem 0;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   margin-top: 0.5rem;
@@ -19,16 +23,24 @@ const ItemStyle = styled.ul`
   max-width: 28rem;
   margin-left: auto;
   margin-right: auto;
+  font-family: Lato, sans-serif;
 `;
 
 const DeleteBtn = styled.button`
-  position: relative;
   float: right;
   margin: 0 20px 0 0;
   background: transparent;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
+  color: ${neutral.main};
+  transition: all 0.25s;
+
+  &:hover,
+  &:focus {
+    color: ${neutral.dark};
+    transform: scale(1.25);
+  }
 `;
 
 function Item({ userToken, item, status }) {
@@ -148,33 +160,34 @@ function Item({ userToken, item, status }) {
           id={itemName}
           checked={checked}
           onChange={handleClick}
-          color="secondary"
+          color="primary"
         />
         {itemName}
       </label>
-
       {/* // [delete-item] 1. Create a button next to each item in list */}
-      <DeleteBtn type="button" onClick={handleOpenModal}>
+      <DeleteBtn
+        type="button"
+        onClick={handleOpenModal}
+        aria-label={`delete ${itemName}`}
+      >
         <FaTrashAlt className="trash-icon" />
       </DeleteBtn>
 
       {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
-      <Typography variant="p">
-        <Modal
-          cancelLabel="Cancel"
-          confirmLabel="Yes"
-          onClose={handleCloseModal}
-          onConfirm={handleDelete}
-          open={openModal}
-          title={
-            <>
-              Are you sure you want to delete <span>{itemName}</span> from your
-              list?
-            </>
-          }
-          titleId="delete-modal-title"
-        />
-      </Typography>
+      <Modal
+        cancelLabel="Cancel"
+        confirmLabel="Yes"
+        onClose={handleCloseModal}
+        onConfirm={handleDelete}
+        open={openModal}
+        title={
+          <>
+            Are you sure you want to delete <span>{itemName}</span> from your
+            list?
+          </>
+        }
+        titleId="delete-modal-title"
+      />
     </ItemStyle>
   );
 }

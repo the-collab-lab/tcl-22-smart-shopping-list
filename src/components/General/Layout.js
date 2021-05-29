@@ -18,6 +18,12 @@ const StyledHeader = styled.header`
     width: auto;
     margin: 12px 0 9px 0;
   }
+
+  @media (max-width: 1400px) {
+    .logo {
+      height: 6vw;
+    }
+  }
 `;
 
 const StyledDiv = styled.div`
@@ -29,6 +35,10 @@ const StyledDiv = styled.div`
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
+
+  @media (max-width: 500px) {
+    padding: 10px;
+  }
 `;
 
 const Layout = ({ children }) => {
