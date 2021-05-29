@@ -66,7 +66,6 @@ function App(props) {
         <Layout>
           <GlobalStyles />
           <div className="App">
-            <h1>Shopping app</h1>
             <RouterComponent
               {...props}
               token={token}
