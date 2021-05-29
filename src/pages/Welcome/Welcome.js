@@ -4,7 +4,6 @@ import CreateOrJoin from '../../components/CreateOrJoin';
 import ShareToken from '../../components/ShareToken';
 import './welcomeStyles.css';
 
-// const Welcome = (props) => {
 class Welcome extends Component {
   constructor() {
     super();
