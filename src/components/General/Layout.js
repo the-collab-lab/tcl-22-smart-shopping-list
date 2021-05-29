@@ -22,7 +22,6 @@ const StyledHeader = styled.header`
 
 const StyledDiv = styled.div`
   max-width: 1170px;
-  /* min-height: calc(100vh-21px); */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
