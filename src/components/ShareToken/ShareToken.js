@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
 import { db } from './../../lib/firebase';
 import { withSnackbar } from 'notistack';
-import { StyledForm } from './elements';
+import { StyledForm, WhiteBGWrapper } from './elements';
+import Logo from './../../logo.svg';
 
 const ShareToken = (props) => {
   const [shareToken, setShareToken] = useState(null);
@@ -37,19 +38,36 @@ const ShareToken = (props) => {
 
   return (
     <>
-      <h2>Welcome to your smart shopping list!</h2>
-      <p>Join an existing shopping list by entering a three word token:</p>
+      <img src={Logo} alt="avoCart logo" style={{ width: '50%' }} />
+      <Typography
+        variant="h1"
+        style={{ color: 'white', paddingTop: '2rem', paddingBottom: '2rem' }}
+      >
+        Welcome to your smart shopping list!
+      </Typography>
+      <Typography
+        variant="body1"
+        style={{ color: '#F2F3F2' }}
+        className="instructions"
+      >
+        Join an existing shopping list <br />
+        by entering a three word token:
+      </Typography>
       <StyledForm id="shareToken" onSubmit={onSubmitHandler}>
-        <TextField
-          id="shareToken"
-          variant="outlined"
-          label="Token"
-          onChange={onChangeHandler}
-          required
-        />
-        <Button color="primary" size="small" type="submit" variant="outlined">
-          Join existing list
-        </Button>
+        <WhiteBGWrapper>
+          <TextField
+            id="shareToken"
+            variant="outlined"
+            label="Token"
+            onChange={onChangeHandler}
+            required
+          />
+        </WhiteBGWrapper>
+        <WhiteBGWrapper>
+          <Button color="primary" type="submit" variant="outlined">
+            Join existing list
+          </Button>
+        </WhiteBGWrapper>
       </StyledForm>
     </>
   );
