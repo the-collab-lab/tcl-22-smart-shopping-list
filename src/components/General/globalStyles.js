@@ -101,6 +101,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   .App {
+    flex: 0 0 50vh;
     width: 100%;
     padding: 3.5em 0;
     background-color: ${theme.palette.background.paper};
