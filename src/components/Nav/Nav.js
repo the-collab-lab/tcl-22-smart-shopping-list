@@ -15,11 +15,14 @@ const StyledDiv = styled.div`
   width: 100%;
   max-width: 1170px;
   position: fixed;
+  float: left;
+  clear: both;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   border-radius: 10px 10px 0 0;
+  z-index: 20;
 `;
 
 const paperStyles = makeStyles({
@@ -27,6 +30,7 @@ const paperStyles = makeStyles({
     minWidth: '100%',
     borderRadius: '12px 12px 0 0',
     background: theme.palette.primary.main,
+    zIndex: 10,
   },
 });
 
@@ -34,6 +38,7 @@ const tabsStyles = makeStyles({
   root: {
     width: '100%',
     color: '#F2F3F2',
+    zIndex: 10,
   },
 });
 
@@ -48,6 +53,13 @@ const tabStyles = makeStyles({
     borderRadius: '5px',
     margin: '10px 15px',
     '&:hover': {
+      backgroundColor: '#A6CF93',
+      cursor: 'pointer',
+      '& svg': {
+        color: 'white',
+      },
+    },
+    '&:active': {
       backgroundColor: '#A6CF93',
       cursor: 'pointer',
       '& svg': {

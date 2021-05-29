@@ -7,6 +7,7 @@ import { db } from './lib/firebase';
 import styled from 'styled-components';
 import { Checkbox } from '@material-ui/core';
 import { FaTrashAlt } from 'react-icons/fa';
+import { neutral } from './components/index';
 
 const ItemStyle = styled.ul`
   text-align: left;
@@ -14,6 +15,7 @@ const ItemStyle = styled.ul`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08),
     0px 1px 12px rgba(0, 0, 0, 0.04);
   color: black;
+  padding: 0.75rem 0;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   margin-top: 0.5rem;
@@ -25,13 +27,20 @@ const ItemStyle = styled.ul`
 `;
 
 const DeleteBtn = styled.button`
-  position: relative;
   float: right;
   margin: 0 20px 0 0;
   background: transparent;
   border: none;
   cursor: pointer;
   margin-top: 12px;
+  color: ${neutral.main};
+  transition: all 0.25s;
+
+  &:hover,
+  &:focus {
+    color: ${neutral.dark};
+    transform: scale(1.25);
+  }
 `;
 
 function Item({ userToken, item, status }) {
@@ -151,7 +160,7 @@ function Item({ userToken, item, status }) {
           id={itemName}
           checked={checked}
           onChange={handleClick}
-          color="secondary"
+          color="primary"
         />
         {itemName}
       </label>

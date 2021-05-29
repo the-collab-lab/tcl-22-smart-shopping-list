@@ -18,6 +18,12 @@ const StyledHeader = styled.header`
   .logo {
     height: 3.125vw;
   }
+
+  @media (max-width: 1400px) {
+    .logo {
+      height: 6vw;
+    }
+  }
 `;
 
 const StyledDiv = styled.div`
@@ -29,6 +35,10 @@ const StyledDiv = styled.div`
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
+
+  @media (max-width: 500px) {
+    padding: 10px;
+  }
 `;
 
 const Layout = ({ children }) => {
