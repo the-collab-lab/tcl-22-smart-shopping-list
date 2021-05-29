@@ -5,7 +5,7 @@ import { Modal } from './components';
 import estimates from './lib/estimates';
 import { db } from './lib/firebase';
 import styled from 'styled-components';
-import { Checkbox, Typography } from '@material-ui/core';
+import { Checkbox } from '@material-ui/core';
 import { FaTrashAlt } from 'react-icons/fa';
 
 const ItemStyle = styled.ul`
@@ -19,6 +19,7 @@ const ItemStyle = styled.ul`
   max-width: 28rem;
   margin-left: auto;
   margin-right: auto;
+  font-family: Lato, sans-serif;
 `;
 
 const DeleteBtn = styled.button`
@@ -28,7 +29,7 @@ const DeleteBtn = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
 `;
 
 function Item({ userToken, item, status }) {
@@ -152,29 +153,30 @@ function Item({ userToken, item, status }) {
         />
         {itemName}
       </label>
-
       {/* // [delete-item] 1. Create a button next to each item in list */}
-      <DeleteBtn type="button" onClick={handleOpenModal} aria-label={`delete ${itemName}`}>
+      <DeleteBtn
+        type="button"
+        onClick={handleOpenModal}
+        aria-label={`delete ${itemName}`}
+      >
         <FaTrashAlt className="trash-icon" />
       </DeleteBtn>
 
       {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
-      <Typography variant="p">
-        <Modal
-          cancelLabel="Cancel"
-          confirmLabel="Yes"
-          onClose={handleCloseModal}
-          onConfirm={handleDelete}
-          open={openModal}
-          title={
-            <>
-              Are you sure you want to delete <span>{itemName}</span> from your
-              list?
-            </>
-          }
-          titleId="delete-modal-title"
-        />
-      </Typography>
+      <Modal
+        cancelLabel="Cancel"
+        confirmLabel="Yes"
+        onClose={handleCloseModal}
+        onConfirm={handleDelete}
+        open={openModal}
+        title={
+          <>
+            Are you sure you want to delete <span>{itemName}</span> from your
+            list?
+          </>
+        }
+        titleId="delete-modal-title"
+      />
     </ItemStyle>
   );
 }

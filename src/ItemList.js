@@ -31,11 +31,6 @@ const StyledNoItems = styled.div`
   align-items: center;
 `;
 
-const StyledP = styled.p`
-  margin-top: 20px;
-  margin-bottom: 20px;
-`;
-
 function ItemList(props) {
   const emptyObj = {
     week: [],
@@ -162,11 +157,11 @@ function ItemList(props) {
         <>
           <StyledNoItems>
             <Typography variant="h1">Your list</Typography>
-            <StyledP>
-              <Typography variant="p">
-                Your shopping list is currently empty. Add your first item.
-              </Typography>
-            </StyledP>
+
+            <Typography paragraph>
+              Your shopping list is currently empty. Add your first item.
+            </Typography>
+
             <Fab
               onClick={redirect}
               type="submit"
