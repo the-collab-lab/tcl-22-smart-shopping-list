@@ -21,7 +21,7 @@ class Welcome extends Component {
   render() {
     if (!this.state.joinList) {
       return (
-        <div class="welcomeScreen">
+        <div className="welcomeScreen">
           <StyledWrapper>
             <CreateOrJoin updateToken={this.props.updateToken} />
             <Button
@@ -37,7 +37,7 @@ class Welcome extends Component {
       );
     } else {
       return (
-        <div class="welcomeScreen">
+        <div className="welcomeScreen">
           <StyledWrapper>
             <ShareToken updateToken={this.props.updateToken} />
           </StyledWrapper>
