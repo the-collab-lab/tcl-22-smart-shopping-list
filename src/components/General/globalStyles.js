@@ -10,7 +10,7 @@ export const pFont = 'Lato';
 export const backupFont = 'sans-serif';
 
 export const primary = {
-  main: '#5F9645',
+  main: '#4F7E3A',
   light: '#A6CF93',
   dark: '#29620F',
 };
@@ -22,7 +22,7 @@ export const accent = {
 };
 
 export const neutral = {
-  main: '#8D8E8D', // dark-grey
+  main: '#707070', // dark-grey
   light: '#F2F3F2', // light-grey
   extraLight: '#FAFAF9', // white
   dark: '#161A14', // black
