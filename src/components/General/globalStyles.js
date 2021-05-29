@@ -65,20 +65,29 @@ export const theme = createMuiTheme({
     fontFamily: [pFont, backupFont].join(','),
     h1: {
       fontFamily: '"Maven Pro", sans-serif',
-      fontSize: 35.16,
       fontWeight: 500,
+      fontSize: 35.16,
+      '@media (max-width:400px)': {
+        fontSize: '2rem',
+      },
     },
     h2: {
       fontFamily: '"Maven Pro", sans-serif',
-      fontSize: 22.5,
       fontWeight: 700,
       lineHeight: 1.3,
+      fontSize: 22.5,
+      '@media (max-width:400px)': {
+        fontSize: '1.5rem',
+      },
     },
     h3: {
       fontFamily: '"Maven Pro", sans-serif',
-      fontSize: 22.5,
       fontWeight: 500,
       lineHeight: 1.3,
+      fontSize: 22.5,
+      '@media (max-width:400px)': {
+        fontSize: '1.5rem',
+      },
     },
     body1: {
       fontFamily: '"Lato", sans-serif',
