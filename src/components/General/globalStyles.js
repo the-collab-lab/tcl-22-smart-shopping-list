@@ -98,10 +98,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   .App {
-    flex: 0 0 50vh;
     width: 100%;
     margin: 4.5em;
-    padding: 3.5em;
+    padding: 3.5em 0;
     background-color: ${theme.palette.background.paper};
     border-radius: 12px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
