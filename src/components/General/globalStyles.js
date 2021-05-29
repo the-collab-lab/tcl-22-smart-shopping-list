@@ -80,6 +80,9 @@ export const theme = createMuiTheme({
       fontWeight: 500,
       lineHeight: 1.3,
     },
+    body1: {
+      fontFamily: '"Lato", sans-serif',
+    },
   },
 });
 
@@ -100,7 +103,6 @@ const GlobalStyle = createGlobalStyle`
   .App {
     flex: 0 0 50vh;
     width: 100%;
-    margin: 4.5em;
     padding: 3.5em 0;
     background-color: ${theme.palette.background.paper};
     border-radius: 12px;
