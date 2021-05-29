@@ -33,10 +33,8 @@ const RouterComponent = (props) => {
             <Welcome updateToken={props.updateToken} />
           )}
         </Route>
-        <Route path="/">
-          <Redirect to="/" />
-        </Route>
-      </Switch>```
+        <Route render={() => <Redirect to="/list" />} />
+      </Switch>
     </Router>
   );
 };
