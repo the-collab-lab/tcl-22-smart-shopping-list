@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, TextField, Typography } from '@material-ui/core';
 import { db } from './../../lib/firebase';
 import { withSnackbar } from 'notistack';
-import { StyledForm, WhiteBGWrapper } from './elements';
+import { StyledForm, ButtonWrapper, InputWrapper } from './elements';
 import Logo from './../../logo.svg';
 
 const ShareToken = (props) => {
@@ -54,7 +54,7 @@ const ShareToken = (props) => {
         by entering a three word token:
       </Typography>
       <StyledForm id="shareToken" onSubmit={onSubmitHandler}>
-        <WhiteBGWrapper>
+        <InputWrapper>
           <TextField
             id="shareToken"
             variant="outlined"
@@ -62,12 +62,12 @@ const ShareToken = (props) => {
             onChange={onChangeHandler}
             required
           />
-        </WhiteBGWrapper>
-        <WhiteBGWrapper>
+        </InputWrapper>
+        <ButtonWrapper>
           <Button color="primary" type="submit" variant="outlined">
             Join existing list
           </Button>
-        </WhiteBGWrapper>
+        </ButtonWrapper>
       </StyledForm>
     </>
   );
