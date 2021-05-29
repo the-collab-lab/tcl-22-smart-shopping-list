@@ -22,6 +22,7 @@ const StyledHeader = styled.header`
 
 const StyledDiv = styled.div`
   max-width: 1170px;
+  padding: 4.5em;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

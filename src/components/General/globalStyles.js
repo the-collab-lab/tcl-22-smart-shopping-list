@@ -102,7 +102,6 @@ const GlobalStyle = createGlobalStyle`
   }
   .App {
     width: 100%;
-    margin: 4.5em;
     padding: 3.5em 0;
     background-color: ${theme.palette.background.paper};
     border-radius: 12px;
@@ -110,7 +109,6 @@ const GlobalStyle = createGlobalStyle`
                 0px 4px 8px rgba(0, 0, 0, 0.08),
                 0px 1px 12px rgba(0, 0, 0, 0.04); 
     text-align: center; 
-    position: relative; // in order to give welcome screen a different background than App
   }
 `;
 
