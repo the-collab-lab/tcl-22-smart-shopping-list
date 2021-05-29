@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import getToken from '../../lib/tokens';
 import { db } from '../../lib/firebase';
+import { StyledWrapper, ButtonWrapper } from './elements';
 
 const CreateOrJoin = (props) => {
   const storeToken = () => {
@@ -10,20 +11,24 @@ const CreateOrJoin = (props) => {
     db.collection(token).doc('ListData').set({ listCreated: new Date() });
   };
   return (
-    <div>
-      <Typography variant="h1" style={{ color: 'white' }}>
+    <StyledWrapper>
+      <Typography
+        variant="h1"
+        style={{ color: 'white', paddingBottom: '2rem' }}
+      >
         Welcome to your smart shopping list
       </Typography>
-      <Button
-        color="primary"
-        onClick={() => storeToken()}
-        type="button"
-        variant="outlined"
-      >
-        Create new list
-      </Button>
-      <br />
-    </div>
+      <ButtonWrapper>
+        <Button
+          color="primary"
+          onClick={() => storeToken()}
+          type="button"
+          variant="outlined"
+        >
+          Create new list
+        </Button>
+      </ButtonWrapper>
+    </StyledWrapper>
   );
 };
 

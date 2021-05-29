@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import CreateOrJoin from '../../components/CreateOrJoin';
 import ShareToken from '../../components/ShareToken';
+import { StyledWrapper } from './elements';
 import './welcomeStyles.css';
 
 class Welcome extends Component {
@@ -21,21 +22,25 @@ class Welcome extends Component {
     if (!this.state.joinList) {
       return (
         <div class="welcomeScreen">
-          <CreateOrJoin updateToken={this.props.updateToken} />
-          <Button
-            color="primary"
-            type="button"
-            variant="contained"
-            onClick={this.toggleJoinList}
-          >
-            Join existing list
-          </Button>
+          <StyledWrapper>
+            <CreateOrJoin updateToken={this.props.updateToken} />
+            <Button
+              color="primary"
+              type="button"
+              variant="contained"
+              onClick={this.toggleJoinList}
+            >
+              Join existing list
+            </Button>
+          </StyledWrapper>
         </div>
       );
     } else {
       return (
         <div class="welcomeScreen">
-          <ShareToken updateToken={this.props.updateToken} />
+          <StyledWrapper>
+            <ShareToken updateToken={this.props.updateToken} />
+          </StyledWrapper>
         </div>
       );
     }
