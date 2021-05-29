@@ -7,7 +7,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import { AddItems, Welcome, ShareYourToken } from '../../pages/index';
-import { theme, primary } from '../../components/index';
+import { theme } from '../../components/index';
 import ItemList from '../../ItemList';
 import styled from 'styled-components';
 
@@ -65,36 +65,36 @@ const tabStyles = makeStyles({
 
 const IconTabs = (props) => {
   const { match, history } = props;
-  const { params } = match;
-  const { page } = params;
+  // const { params } = match;
+  const { path } = match;
   const paperClasses = paperStyles();
   const tabsClasses = tabsStyles();
   const iconClasses = iconStyles();
   const tabClasses = tabStyles();
 
   const tabNameToIndex = {
-    0: props.token ? 'list' : 'welcome',
-    1: 'additems',
-    2: 'shareyourtoken',
+    0: props.token ? '/list' : '/welcome',
+    1: '/additems',
+    2: '/shareyourtoken',
   };
 
   const indexToTabName = {
-    list: 0,
-    welcome: 0,
-    additems: 1,
-    shareyourtoken: 2,
+    '/list': 0,
+    '/welcome': 0,
+    '/additems': 1,
+    '/shareyourtoken': 2,
   };
 
-  const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
+  const [selectedTab, setSelectedTab] = useState(indexToTabName[path]);
 
   const handleChange = (event, newValue) => {
-    history.push(`/${tabNameToIndex[newValue]}`);
+    history.push(`${tabNameToIndex[newValue]}`);
     setSelectedTab(newValue);
   };
 
   useEffect(() => {
-    setSelectedTab(indexToTabName[page]);
-  }, [page]);
+    setSelectedTab(indexToTabName[path]);
+  }, [path]);
 
   return (
     <>
