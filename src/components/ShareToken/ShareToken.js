@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
 import { db } from './../../lib/firebase';
 import { withSnackbar } from 'notistack';
 import { StyledForm } from './elements';
@@ -37,8 +37,16 @@ const ShareToken = (props) => {
 
   return (
     <>
-      <h2>Welcome to your smart shopping list!</h2>
-      <p>Join an existing shopping list by entering a three word token:</p>
+      <Typography variant="h1" style={{ color: 'white' }}>
+        Welcome to your smart shopping list!
+      </Typography>
+      <Typography
+        variant="body1"
+        style={{ color: '#F2F3F2' }}
+        className="instructions"
+      >
+        Join an existing shopping list by entering a three word token:
+      </Typography>
       <StyledForm id="shareToken" onSubmit={onSubmitHandler}>
         <TextField
           id="shareToken"

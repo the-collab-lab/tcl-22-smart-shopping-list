@@ -80,6 +80,9 @@ export const theme = createMuiTheme({
       fontWeight: 500,
       lineHeight: 1.3,
     },
+    body1: {
+      fontFamily: '"Lato", sans-serif',
+    },
   },
 });
 
