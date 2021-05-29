@@ -159,20 +159,22 @@ function Item({ userToken, item, status }) {
       </DeleteBtn>
 
       {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
-      <Modal
-        cancelLabel="Cancel"
-        confirmLabel="Yes"
-        onClose={handleCloseModal}
-        onConfirm={handleDelete}
-        open={openModal}
-        title={
-          <>
-            Are you sure you want to delete <span>{itemName}</span> from your
-            list?
-          </>
-        }
-        titleId="delete-modal-title"
-      />
+      <Typography variant="p">
+        <Modal
+          cancelLabel="Cancel"
+          confirmLabel="Yes"
+          onClose={handleCloseModal}
+          onConfirm={handleDelete}
+          open={openModal}
+          title={
+            <>
+              Are you sure you want to delete <span>{itemName}</span> from your
+              list?
+            </>
+          }
+          titleId="delete-modal-title"
+        />
+      </Typography>
     </ItemStyle>
   );
 }

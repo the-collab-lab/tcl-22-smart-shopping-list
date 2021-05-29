@@ -21,6 +21,21 @@ const StyledDiv = styled.div`
   margin-bottom: 30px;
 `;
 
+const StyledHeading = styled.div`
+  margin-top: 30px;
+`;
+
+const StyledNoItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledP = styled.p`
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
 function ItemList(props) {
   const emptyObj = {
     week: [],
@@ -145,8 +160,22 @@ function ItemList(props) {
       {props.error && !props.loading && <strong>Error: {props.error}</strong>}
       {props.list && props.list.length === 0 && (
         <>
-          <p>Your shopping list is currently empty.</p>
-          <button onClick={redirect}>Add Item</button>
+          <StyledNoItems>
+            <Typography variant="h1">Your list</Typography>
+            <StyledP>
+              <Typography variant="p">
+                Your shopping list is currently empty. Add your first item.
+              </Typography>
+            </StyledP>
+            <Fab
+              onClick={redirect}
+              type="submit"
+              color="secondary"
+              aria-label="add"
+            >
+              <Add />
+            </Fab>
+          </StyledNoItems>
         </>
       )}
       {props.list && props.list.length > 0 && (
@@ -154,7 +183,6 @@ function ItemList(props) {
           {/* [filter-list] 1. Add text field above shopping list */}
 
           <StyledDiv>
-            {' '}
             <Typography variant="h1">Your list:</Typography>
           </StyledDiv>
 
@@ -181,12 +209,14 @@ function ItemList(props) {
               return (
                 value.length > 0 && (
                   <div key={key}>
-                    <Typography variant="h2">
-                      {key === 'week' && 'Items for next week:'}
-                      {key === 'month' && 'Items for next month:'}
-                      {key === 'longer' && 'Items for much later:'}
-                      {key === 'inactive' && 'No prediction yet:'}
-                    </Typography>
+                    <StyledHeading>
+                      <Typography variant="h2">
+                        {key === 'week' && 'Items for next week:'}
+                        {key === 'month' && 'Items for next month:'}
+                        {key === 'longer' && 'Items for much later:'}
+                        {key === 'inactive' && 'No prediction yet:'}
+                      </Typography>
+                    </StyledHeading>
 
                     {value.map((item) => (
                       <Typography variant="p">
@@ -203,8 +233,12 @@ function ItemList(props) {
               );
             })}
           </form>
-          <Fab type="submit" color="secondary" aria-label="add">
-            {' '}
+          <Fab
+            onClick={redirect}
+            type="submit"
+            color="secondary"
+            aria-label="add"
+          >
             <Add />
           </Fab>
         </>
