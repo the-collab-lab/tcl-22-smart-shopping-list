@@ -10,7 +10,7 @@ export const pFont = 'Lato';
 export const backupFont = 'sans-serif';
 
 export const primary = {
-  main: '#5F9645',
+  main: '#4F7E3A',
   light: '#A6CF93',
   dark: '#29620F',
 };
@@ -22,7 +22,7 @@ export const accent = {
 };
 
 export const neutral = {
-  main: '#8D8E8D', // dark-grey
+  main: '#707070', // dark-grey
   light: '#F2F3F2', // light-grey
   extraLight: '#FAFAF9', // white
   dark: '#161A14', // black
@@ -98,10 +98,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   .App {
-    flex: 0 0 50vh;
     width: 100%;
     margin: 4.5em;
-    padding: 3.5em;
+    padding: 3.5em 0;
     background-color: ${theme.palette.background.paper};
     border-radius: 12px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
