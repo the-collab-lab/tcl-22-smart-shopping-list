@@ -38,7 +38,7 @@ const ShareToken = (props) => {
 
   return (
     <>
-      <img src={Logo} alt="avoCart logo" style={{ width: '50%' }} />
+      <img src={Logo} alt="avoCart logo" className="smallLogo" />
       <Typography
         variant="h1"
         style={{ color: 'white', paddingTop: '2rem', paddingBottom: '2rem' }}
