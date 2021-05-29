@@ -4,8 +4,8 @@ import ShareToken from './ShareToken';
 import GlobalStyles, { primary, accent, neutral } from './General/globalStyles';
 import Layout from './General/Layout';
 import { theme } from './General/globalStyles';
+import RouterComponent from './Nav/RouterComponent';
 
-// Then you can export all of the components from here
 export {
   CreateOrJoin,
   Modal,
@@ -16,4 +16,5 @@ export {
   neutral,
   Layout,
   theme,
+  RouterComponent,
 };

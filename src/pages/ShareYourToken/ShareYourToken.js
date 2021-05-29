@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { StyledForm, ReadOnlyInput } from './elements';
+import { StyledForm, ReadOnlyInput, InputWrapper } from './elements';
 import { Button, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
@@ -20,11 +20,13 @@ function ShareYourToken(props) {
   return (
     <>
       <StyledForm>
-        <Typography variant="h2">Share your list</Typography>
+        <Typography variant="h1">Share your list</Typography>
         <Typography paragraph>
           Copy the token below to share your shopping list with others:
         </Typography>
-        <ReadOnlyInput value={sharedUserToken} ref={inputRef} readOnly />
+        <InputWrapper>
+          <ReadOnlyInput value={sharedUserToken} ref={inputRef} readOnly />
+        </InputWrapper>
         {document.queryCommandSupported('copy') && (
           <Button
             color="secondary"
