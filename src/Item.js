@@ -154,7 +154,7 @@ function Item({ userToken, item, status }) {
       </label>
 
       {/* // [delete-item] 1. Create a button next to each item in list */}
-      <DeleteBtn type="button" onClick={handleOpenModal}>
+      <DeleteBtn type="button" onClick={handleOpenModal} aria-label={`delete ${itemName}`}>
         <FaTrashAlt className="trash-icon" />
       </DeleteBtn>
 
