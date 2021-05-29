@@ -10,3 +10,8 @@ export const StyledForm = styled.form`
 export const ReadOnlyInput = styled.input`
   margin-bottom: 10px;
 `;
+
+export const StyledP = styled.p`
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
