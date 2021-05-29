@@ -3,6 +3,23 @@ import Item from './Item';
 import { useHistory } from 'react-router-dom';
 import filter from './lib/filter';
 import { differenceInDays, fromUnixTime } from 'date-fns';
+import styled from 'styled-components';
+import { Typography, TextField, Fab } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
+import { FaTrashAlt } from 'react-icons/fa';
+
+const DeleteBtnSearch = styled.button`
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 19px;
+  margin-left: 15px;
+`;
+
+const StyledDiv = styled.div`
+  margin-bottom: 30px;
+`;
 
 function ItemList(props) {
   const emptyObj = {
@@ -135,51 +152,61 @@ function ItemList(props) {
       {props.list && props.list.length > 0 && (
         <>
           {/* [filter-list] 1. Add text field above shopping list */}
+
+          <StyledDiv>
+            {' '}
+            <Typography variant="h1">Your list:</Typography>
+          </StyledDiv>
+
           <label htmlFor="filter">
-            Filter Items
-            <input
+            <TextField
               id="filter"
+              variant="outlined"
               type="text"
-              placeholder="Start typing here..."
+              label="Search items"
               value={query}
               onChange={changeHandler}
             />
           </label>
+
           {/* [filter-list] 4. Add 'X' button for user to clear query field */}
           {query.length !== 0 && (
-            <button aria-label="clear field" onClick={clickHandler}>
-              X
-            </button>
+            <DeleteBtnSearch aria-label="clear field" onClick={clickHandler}>
+              <FaTrashAlt className="trash-icon" />
+            </DeleteBtnSearch>
           )}
-          <h2>Shopping List:</h2>
 
           <form>
             {Object.entries(queryObj).map(([key, value]) => {
               return (
                 value.length > 0 && (
                   <div key={key}>
-                    <h3>
-                      {key === 'week' && 'Items to buy in the next week:'}
-                      {key === 'month' && 'Items to buy in the next month:'}
-                      {key === 'longer' &&
-                        'Items to buy in the distant future:'}
-                      {key === 'inactive' && "Purchases we can't predict yet:"}
-                    </h3>
-                    <ul>
-                      {value.map((item) => (
+                    <Typography variant="h2">
+                      {key === 'week' && 'Items for next week:'}
+                      {key === 'month' && 'Items for next month:'}
+                      {key === 'longer' && 'Items for much later:'}
+                      {key === 'inactive' && 'No prediction yet:'}
+                    </Typography>
+
+                    {value.map((item) => (
+                      <Typography variant="p">
                         <Item
                           key={item.id}
                           userToken={props.userToken}
                           item={item}
                           status={key}
                         />
-                      ))}
-                    </ul>
+                      </Typography>
+                    ))}
                   </div>
                 )
               );
             })}
           </form>
+          <Fab type="submit" color="secondary" aria-label="add">
+            {' '}
+            <Add />
+          </Fab>
         </>
       )}
     </div>
