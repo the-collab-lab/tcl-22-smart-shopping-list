@@ -10,7 +10,7 @@ export const pFont = 'Lato';
 export const backupFont = 'sans-serif';
 
 export const primary = {
-  main: '#5F9645',
+  main: '#4F7E3A',
   light: '#A6CF93',
   dark: '#29620F',
 };
@@ -22,7 +22,7 @@ export const accent = {
 };
 
 export const neutral = {
-  main: '#8D8E8D', // dark-grey
+  main: '#707070', // dark-grey
   light: '#F2F3F2', // light-grey
   extraLight: '#FAFAF9', // white
   dark: '#161A14', // black
@@ -65,20 +65,29 @@ export const theme = createMuiTheme({
     fontFamily: [pFont, backupFont].join(','),
     h1: {
       fontFamily: '"Maven Pro", sans-serif',
-      fontSize: 35.16,
       fontWeight: 500,
+      fontSize: 35.16,
+      '@media (max-width:400px)': {
+        fontSize: '2rem',
+      },
     },
     h2: {
       fontFamily: '"Maven Pro", sans-serif',
-      fontSize: 22.5,
       fontWeight: 700,
       lineHeight: 1.3,
+      fontSize: 22.5,
+      '@media (max-width:400px)': {
+        fontSize: '1.5rem',
+      },
     },
     h3: {
       fontFamily: '"Maven Pro", sans-serif',
-      fontSize: 22.5,
       fontWeight: 500,
       lineHeight: 1.3,
+      fontSize: 22.5,
+      '@media (max-width:400px)': {
+        fontSize: '1.5rem',
+      },
     },
     body1: {
       fontFamily: '"Lato", sans-serif',
@@ -103,15 +112,13 @@ const GlobalStyle = createGlobalStyle`
   .App {
     flex: 0 0 50vh;
     width: 100%;
-    margin: 4.5em;
-    padding: 3.5em;
+    padding: 3.5em 0;
     background-color: ${theme.palette.background.paper};
     border-radius: 12px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
                 0px 4px 8px rgba(0, 0, 0, 0.08),
                 0px 1px 12px rgba(0, 0, 0, 0.04); 
     text-align: center; 
-    position: relative; // in order to give welcome screen a different background than App
   }
 `;
 

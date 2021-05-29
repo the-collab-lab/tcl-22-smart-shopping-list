@@ -4,6 +4,35 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from './components';
 import estimates from './lib/estimates';
 import { db } from './lib/firebase';
+import styled from 'styled-components';
+import { Checkbox } from '@material-ui/core';
+import { FaTrashAlt } from 'react-icons/fa';
+
+const ItemStyle = styled.ul`
+  text-align: left;
+  background: #f2f3f2;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08),
+    0px 1px 12px rgba(0, 0, 0, 0.04);
+  color: black;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Lato, sans-serif;
+`;
+
+const DeleteBtn = styled.button`
+  position: relative;
+  float: right;
+  margin: 0 20px 0 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 12px;
+`;
 
 function Item({ userToken, item, status }) {
   const {
@@ -114,21 +143,27 @@ function Item({ userToken, item, status }) {
   };
 
   return (
-    <li>
+    <ItemStyle>
       <label htmlFor={itemName} aria-label={itemName + ' (' + status + ')'}>
-        <input
+        <Checkbox
           type="checkbox"
           name={itemName}
           id={itemName}
           checked={checked}
           onChange={handleClick}
+          color="secondary"
         />
         {itemName}
       </label>
       {/* // [delete-item] 1. Create a button next to each item in list */}
-      <button type="button" onClick={handleOpenModal}>
-        X
-      </button>
+      <DeleteBtn
+        type="button"
+        onClick={handleOpenModal}
+        aria-label={`delete ${itemName}`}
+      >
+        <FaTrashAlt className="trash-icon" />
+      </DeleteBtn>
+
       {/* // [delete-item] 2. Create a button modal that will render when user tries to delete item */}
       <Modal
         cancelLabel="Cancel"
@@ -144,7 +179,7 @@ function Item({ userToken, item, status }) {
         }
         titleId="delete-modal-title"
       />
-    </li>
+    </ItemStyle>
   );
 }
 
