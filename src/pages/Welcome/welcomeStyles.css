@@ -1,6 +1,11 @@
 .welcomeScreen {
-  background-image: url('./../../welcomeBackground.png');
-  background-size: cover;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.17) 28.26%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    #29620f;
   position: absolute;
   top: 0;
   bottom: 0;
