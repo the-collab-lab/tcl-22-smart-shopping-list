@@ -2,12 +2,7 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import getToken from '../../lib/tokens';
 import { db } from '../../lib/firebase';
-import {
-  StyledWrapper,
-  LogoWrapper,
-  AnimatedLogo,
-  ButtonWrapper,
-} from './elements';
+import { StyledWrapper, LogoWrapper, ButtonWrapper } from './elements';
 import { Logo } from '../index';
 
 const CreateOrJoin = (props) => {

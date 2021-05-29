@@ -1,43 +1,6 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React from 'react';
 
 const Logo = ({ type }) => {
-  const outline = useRef(null);
-  const cap = useRef(null);
-  const body = useRef(null);
-  const face = useRef(null);
-
-  useLayoutEffect(() => {
-    let interval;
-
-    if (type === 'animated') {
-      outline.current.setAttribute('stroke-dashoffset', '275');
-      cap.current.setAttribute('stroke', 'none');
-      face.current.setAttribute('stroke', 'none');
-      body.current.setAttribute('fill', 'none');
-
-      let count = 274;
-      interval = setInterval(() => {
-        outline.current.setAttribute('stroke-dashoffset', count);
-        console.log('interval running');
-        count--;
-        if (count === 274 / 2) {
-          cap.current.setAttribute('stroke', '#A6CF93');
-        }
-        if (count === 0) {
-          setTimeout(() => {
-            body.current.setAttribute('fill', '#FAFAF9');
-          }, 200);
-          setTimeout(() => {
-            face.current.setAttribute('stroke', '#A6CF93');
-          }, 600);
-        }
-        return count === 0 && clearInterval(interval);
-      }, 5);
-    }
-
-    return () => clearInterval(interval);
-  }, [type]);
-
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +14,6 @@ const Logo = ({ type }) => {
         AvoCart logo: a smiling avocado
       </title>
       <path
-        ref={outline}
         className="outline"
         stroke="#A6CF93"
         strokeLinecap="round"
@@ -59,7 +21,6 @@ const Logo = ({ type }) => {
         d="M176.365 111.045c-25.135 0-40.208-20.078-36.142-40.479 2.447-12.275 4.847-22.874 7.716-31.735 2.879-8.893 6.1-15.605 9.963-20.361 4.883-6.014 11.832-8.007 15.945-8.637a24.263 24.263 0 012.01-.227 13.486 13.486 0 01.508-.026s0 0 0 0c.053.002.157.005.307.014.301.016.781.052 1.404.128 3.856.472 11.498 2.278 16.752 8.748 3.862 4.757 7.083 11.469 9.963 20.361 2.869 8.861 5.269 19.46 7.715 31.735 4.067 20.401-11.006 40.479-36.141 40.479z"
       />
       <path
-        ref={cap}
         className="cap"
         stroke="#A6CF93"
         strokeLinecap="round"
@@ -67,12 +28,12 @@ const Logo = ({ type }) => {
         d="M175.027 2.161c.046-.05.095-.095.145-.133.144-.109.384-.228.829-.228.46 0 .709.119.854.225.037.027.074.058.109.092l-1.937.044z"
       />
       <path
-        ref={body}
+        className="body"
         fill="#FAFAF9"
         d="M176.366 110.873c-24.125 0-39.44-20.753-35.356-42.409 4.084-21.655 8.18-38.347 15.806-48.273 5.28-6.872 12.621-8.986 16.638-9.636 0 0 1.411-.289 2.412-.289 1 0 2.579.167 2.579.167 3.754.486 11.801 2.379 17.471 9.758 7.626 9.926 11.722 26.618 15.806 48.273 4.084 21.656-11.23 42.409-35.356 42.409z"
       />
       <path
-        ref={face}
+        className="face"
         stroke="#A6CF93"
         strokeLinecap="round"
         strokeWidth="2.5"

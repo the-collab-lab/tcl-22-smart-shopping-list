@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { accent, neutral } from '../../components/index';
 
 // These elements are really just associated with the DeleteModal component
 // No need to make these available everywhere

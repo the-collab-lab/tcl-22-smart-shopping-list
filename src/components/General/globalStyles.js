@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { keyframes, createGlobalStyle } from 'styled-components';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 // --- THEME FONTS AND COLORS ---
@@ -88,6 +88,15 @@ export const theme = createMuiTheme({
 
 // --- STYLED_COMPONENTS ---
 
+const appear = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 const GlobalStyle = createGlobalStyle`
   li {
     list-style: none;
@@ -110,6 +119,8 @@ const GlobalStyle = createGlobalStyle`
                 0px 4px 8px rgba(0, 0, 0, 0.08),
                 0px 1px 12px rgba(0, 0, 0, 0.04); 
     text-align: center; 
+    opacity: 0;
+    animation: 0.8s 0.2s ease-in-out ${appear} forwards;
   }
 `;
 
