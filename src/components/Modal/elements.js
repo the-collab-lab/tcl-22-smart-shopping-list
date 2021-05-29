@@ -11,7 +11,7 @@ export const StyledModalBtn = styled.button`
   padding: 5px;
   margin: 0.5rem 1rem;
   width: 6rem;
-  background: ${accent.main};
+  background: #ffc344;
   color: black;
   text-align: center;
   cursor: pointer;
@@ -29,7 +29,7 @@ export const StyledModalLayout = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
-  background-color: ${neutral.extraLight};
+  background-color: #fafaf9;
   padding: 6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);

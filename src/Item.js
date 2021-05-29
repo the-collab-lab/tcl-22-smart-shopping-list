@@ -10,7 +10,9 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const ItemStyle = styled.ul`
   text-align: left;
-  background-color: lightgray;
+  background: #f2f3f2;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08),
+    0px 1px 12px rgba(0, 0, 0, 0.04);
   color: black;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;

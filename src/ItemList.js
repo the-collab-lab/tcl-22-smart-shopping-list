@@ -31,6 +31,10 @@ const StyledNoItems = styled.div`
   align-items: center;
 `;
 
+const StyledButton = styled.div`
+  margin-top: 30px;
+`;
+
 function ItemList(props) {
   const emptyObj = {
     week: [],
@@ -161,7 +165,6 @@ function ItemList(props) {
             <Typography paragraph>
               Your shopping list is currently empty. Add your first item.
             </Typography>
-
             <Fab
               onClick={redirect}
               type="submit"
@@ -228,14 +231,16 @@ function ItemList(props) {
               );
             })}
           </form>
-          <Fab
-            onClick={redirect}
-            type="submit"
-            color="secondary"
-            aria-label="add"
-          >
-            <Add />
-          </Fab>
+          <StyledButton>
+            <Fab
+              onClick={redirect}
+              type="submit"
+              color="secondary"
+              aria-label="add"
+            >
+              <Add />
+            </Fab>
+          </StyledButton>
         </>
       )}
     </div>
