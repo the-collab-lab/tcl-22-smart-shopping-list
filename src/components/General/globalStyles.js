@@ -131,6 +131,14 @@ const GlobalStyle = createGlobalStyle`
     opacity: 0;
     animation: 0.8s 0.2s ease-in-out ${appear} forwards;
   }
+  @media screen and (prefers-reduced-motion: reduce) {  
+    * {
+      /* Very short durations means JavaScript that relies on events still works */
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
 `;
 
 export default GlobalStyle;
