@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import getToken from '../../lib/tokens';
 import { db } from '../../lib/firebase';
-import { StyledWrapper, ButtonWrapper } from './elements';
-import Logo from './../../logo.svg';
+import { StyledWrapper, LogoWrapper, ButtonWrapper } from './elements';
+import { Logo } from '../index';
 
 const CreateOrJoin = (props) => {
   const storeToken = () => {
@@ -13,7 +13,9 @@ const CreateOrJoin = (props) => {
   };
   return (
     <StyledWrapper>
-      <img src={Logo} alt="avoCart logo" className="largeLogo" />
+      <LogoWrapper>
+        <Logo type="animated" />
+      </LogoWrapper>
       <Typography
         variant="h1"
         style={{ color: 'white', paddingTop: '2rem', paddingBottom: '2rem' }}

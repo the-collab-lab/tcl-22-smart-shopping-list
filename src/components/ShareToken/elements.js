@@ -8,6 +8,11 @@ export const StyledForm = styled.form`
   padding-top: 1rem;
 `;
 
+export const LogoWrapper = styled.div`
+  display: inline-block;
+  width: 50%;
+`;
+
 export const InputWrapper = styled.div`
   background-color: white;
   width: fit-content;

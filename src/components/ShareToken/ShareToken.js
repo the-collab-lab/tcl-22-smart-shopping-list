@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { Button, TextField, Typography } from '@material-ui/core';
 import { db } from './../../lib/firebase';
 import { withSnackbar } from 'notistack';
-import { StyledForm, ButtonWrapper, InputWrapper } from './elements';
-import Logo from './../../logo.svg';
+import {
+  StyledForm,
+  LogoWrapper,
+  ButtonWrapper,
+  InputWrapper,
+} from './elements';
+import { Logo } from '../index';
 
 const ShareToken = (props) => {
   const [shareToken, setShareToken] = useState(null);
@@ -38,7 +43,9 @@ const ShareToken = (props) => {
 
   return (
     <>
-      <img src={Logo} alt="avoCart logo" className="smallLogo" />
+      <LogoWrapper>
+        <Logo type="still" />
+      </LogoWrapper>
       <Typography
         variant="h1"
         style={{ color: 'white', paddingTop: '2rem', paddingBottom: '2rem' }}
