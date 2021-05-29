@@ -3,6 +3,7 @@ import { Button, TextField, Typography } from '@material-ui/core';
 import { db } from './../../lib/firebase';
 import { withSnackbar } from 'notistack';
 import { StyledForm, WhiteBGWrapper } from './elements';
+import Logo from './../../logo.svg';
 
 const ShareToken = (props) => {
   const [shareToken, setShareToken] = useState(null);
@@ -37,9 +38,10 @@ const ShareToken = (props) => {
 
   return (
     <>
+      <img src={Logo} alt="avoCart logo" style={{ width: '50%' }} />
       <Typography
         variant="h1"
-        style={{ color: 'white', paddingBottom: '2rem' }}
+        style={{ color: 'white', paddingTop: '2rem', paddingBottom: '2rem' }}
       >
         Welcome to your smart shopping list!
       </Typography>
