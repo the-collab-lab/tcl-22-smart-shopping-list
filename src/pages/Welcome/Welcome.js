@@ -1,30 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
-import getToken from '../../lib/tokens';
-import { db } from '../../lib/firebase';
+import CreateOrJoin from '../../components/CreateOrJoin';
 import ShareToken from '../../components/ShareToken';
 
-const Welcome = (props) => {
-  const storeToken = () => {
-    const token = getToken();
-    props.updateToken(token);
-    db.collection(token).doc('ListData').set({ listCreated: new Date() });
-  };
-  return (
-    <div>
-      <h2>Welcome to your Smart Shopping List!</h2>
-      <Button
-        color="primary"
-        onClick={() => storeToken()}
-        type="button"
-        variant="contained"
-      >
-        Create a new list
-      </Button>
-      <hr />
-      <ShareToken updateToken={props.updateToken} />
-    </div>
-  );
-};
+// const Welcome = (props) => {
+class Welcome extends Component {
+  constructor() {
+    super();
+    this.state = {
+      joinList: false,
+    };
+    this.toggleJoinList = this.toggleJoinList.bind(this);
+  }
+  toggleJoinList() {
+    this.setState({
+      joinList: true,
+    });
+  }
+  render() {
+    if (!this.state.joinList) {
+      return (
+        <div>
+          <CreateOrJoin updateToken={this.props.updateToken} />
+          <Button
+            color="primary"
+            type="button"
+            variant="contained"
+            onClick={this.toggleJoinList}
+          >
+            Join existing list
+          </Button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <ShareToken updateToken={this.props.updateToken} />
+        </div>
+      );
+    }
+  }
+}
+// };
 
 export default Welcome;
