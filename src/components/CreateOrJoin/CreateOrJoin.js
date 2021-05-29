@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import getToken from '../../lib/tokens';
 import { db } from '../../lib/firebase';
+import { StyledWrapper, ButtonWrapper } from './elements';
+import Logo from './../../logo.svg';
 
 const CreateOrJoin = (props) => {
   const storeToken = () => {
@@ -10,18 +12,25 @@ const CreateOrJoin = (props) => {
     db.collection(token).doc('ListData').set({ listCreated: new Date() });
   };
   return (
-    <div>
-      <h2>Welcome to your smart shopping list!</h2>
-      <Button
-        color="primary"
-        onClick={() => storeToken()}
-        type="button"
-        variant="outlined"
+    <StyledWrapper>
+      <img src={Logo} alt="avoCart logo" />
+      <Typography
+        variant="h1"
+        style={{ color: 'white', paddingTop: '2rem', paddingBottom: '2rem' }}
       >
-        Create new list
-      </Button>
-      <br />
-    </div>
+        Welcome to your smart shopping list
+      </Typography>
+      <ButtonWrapper>
+        <Button
+          color="primary"
+          onClick={() => storeToken()}
+          type="button"
+          variant="outlined"
+        >
+          Create new list
+        </Button>
+      </ButtonWrapper>
+    </StyledWrapper>
   );
 };
 
