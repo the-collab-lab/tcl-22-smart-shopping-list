@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import getToken from '../../lib/tokens';
 import { db } from '../../lib/firebase';
 
@@ -11,7 +11,9 @@ const CreateOrJoin = (props) => {
   };
   return (
     <div>
-      <h2>Welcome to your smart shopping list!</h2>
+      <Typography variant="h1" style={{ color: 'white' }}>
+        Welcome to your smart shopping list
+      </Typography>
       <Button
         color="primary"
         onClick={() => storeToken()}
