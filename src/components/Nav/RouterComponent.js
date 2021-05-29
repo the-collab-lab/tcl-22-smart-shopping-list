@@ -9,21 +9,23 @@ const RouterComponent = (props) => {
   return (
     <Router>
       <Switch>
-        <Route
-          exact
-          path="/:page"
-          render={(props) => (
-            <Nav
-              {...props}
-              token={token}
-              list={list}
-              loading={loading}
-              error={error}
-              userToken={token}
-              updateToken={updateToken}
-            />
-          )}
-        />
+        {props.token && (
+          <Route
+            exact
+            path={['/list', '/additems', '/shareyourtoken']}
+            render={(props) => (
+              <Nav
+                {...props}
+                token={token}
+                list={list}
+                loading={loading}
+                error={error}
+                userToken={token}
+                updateToken={updateToken}
+              />
+            )}
+          />
+        )}
         <Route exact path="/">
           {props.token ? (
             <Redirect to="/list" />
