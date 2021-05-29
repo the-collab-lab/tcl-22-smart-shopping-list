@@ -5,15 +5,16 @@ import styled from 'styled-components';
 // You could have a more Global elements file, as well,
 // as well as use the `GlobalStyles` component from styled-components
 export const StyledModalBtn = styled.button`
+  font-family: Lato, sans-serif;
   display: inline-block;
   padding: 5px;
   margin: 0.5rem 1rem;
   width: 6rem;
-  background: transparent;
+  background: #ffc344;
   color: black;
   text-align: center;
   cursor: pointer;
-  background: lightgray;
+  background: ;
   justify-content: center;
   border: none;
   &:hover {
@@ -22,6 +23,7 @@ export const StyledModalBtn = styled.button`
 `;
 
 export const StyledModalLayout = styled.div`
+  font-family: Lato, sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;
