@@ -13,7 +13,7 @@ const CreateOrJoin = (props) => {
   };
   return (
     <StyledWrapper>
-      <img src={Logo} alt="avoCart logo" />
+      <img src={Logo} alt="avoCart logo" className="largeLogo" />
       <Typography
         variant="h1"
         style={{ color: 'white', paddingTop: '2rem', paddingBottom: '2rem' }}
