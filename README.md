@@ -1,4 +1,4 @@
-# [![avoCart](public/og-img-lg.png 'avoCart banner - Welcome to your smart shopping list!')](https://tcl-22-shopping-list.web.app/)
+# [![avoCart banner - Welcome to your smart shopping list!](public/og-img-lg.png 'avoCart')](https://tcl-22-shopping-list.web.app/)
 
 [AvoCart](https://tcl-22-shopping-list.web.app/) is a smart shopping list that learns your buying habits and helps you remember what you need to buy on your next trip to the store.
 
@@ -10,7 +10,7 @@ As a user, you will enter items (e.g., “Greek yogurt” or “Paper towels”)
 
 ## Demo
 
-[![youtube-preview](./_resources/images/youtube-preview.png 'youtube preview image - TCL-22 final weekly sync')](https://youtu.be/XJ5hsiWm7Z0?t=90)
+[![youtube preview image - TCL-22 final weekly sync](./_resources/images/youtube-preview.png 'youtube preview')](https://youtu.be/XJ5hsiWm7Z0?t=90)
 
 ## Acknowledgements
 
