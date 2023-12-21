@@ -18,6 +18,7 @@ class Welcome extends Component {
       joinList: true,
     });
   }
+
   render() {
     if (!this.state.joinList) {
       return (

@@ -106,6 +106,7 @@ const IconTabs = (props) => {
 
   useEffect(() => {
     setSelectedTab(indexToTabName[path]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
 
   return (
